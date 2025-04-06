@@ -1,0 +1,7 @@
+title: Amit Vyas
+description: Software Engineer & Researcher
+baseurl: ""
+url: "https://thevyasamit.github.io"
+
+# Build settings
+markdown: kramdown 
