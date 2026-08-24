@@ -1,12 +1,15 @@
-# Sidebar navigation. `url` may be a site path or an in-page anchor.
-# `match` (optional) marks the item as current when the page URL contains it.
+# Sidebar navigation, in the order the page actually scrolls.
+# `url` may be a site path or an in-page anchor.
+# `match` (optional) marks the item current when the page URL contains it.
 - label: Home
   url: /
   match: exact
-- label: Writing
-  url: /writing/
-  match: /writing
+- label: About
+  url: /#about
 - label: Experience
   url: /#experience
 - label: Publications
   url: /#publications
+- label: Writing
+  url: /writing/
+  match: /writing

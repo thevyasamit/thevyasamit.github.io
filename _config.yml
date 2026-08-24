@@ -45,7 +45,6 @@ kramdown:
   auto_ids: true          # heading anchors -> deep-linkable, better for AI + humans
 
 permalink: /writing/:slug/
-paginate: false
 future: false
 
 plugins:

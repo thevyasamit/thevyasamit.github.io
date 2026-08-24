@@ -8,9 +8,11 @@ intro:
     at the <a href="https://icicle.osu.edu/">ICICLE AI Institute</a>,
     The Ohio State University.
   quote: I'm a human trying to understand AI before AI starts understanding humans.
-  cta:
-    label: Read my writing
-    url: /writing/
+  # Optional call-to-action. Left unset deliberately: Writing is in the nav,
+  # so a button here is one more thing to look at for no extra reach.
+  # cta:
+  #   label: Read my writing
+  #   url: /writing/
 
 # Each list item is one paragraph.
 about:

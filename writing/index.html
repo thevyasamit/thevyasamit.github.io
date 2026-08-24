@@ -64,9 +64,6 @@ search: true
       <p class="post-card__excerpt">
         {{ post.description | default: post.excerpt | strip_html | strip_newlines | truncate: 190 }}
       </p>
-      <span class="post-card__more" aria-hidden="true">
-        Read <svg class="icon"><use href="#i-arrow"></use></svg>
-      </span>
     </article>
   </li>
   {%- endfor %}
