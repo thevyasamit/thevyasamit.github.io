@@ -1,5 +1,218 @@
-# My presence on the web #
-We are in a world where almost everthing is virtual. 
-Just like in the earlier days of the civilization people used to have their home/mailing address and I believe now is the time where people should have their e-address or a personal web address for their presence in this vast electronic and web dominating world in addition to their physical presence. 
-So, this is my personal webpage and I'll be updating it as and when I get time.
+# thevyasamit.github.io
 
+My personal site — profile, CV and writing. A static [Jekyll](https://jekyllrb.com/)
+site, hosted free on GitHub Pages, built and deployed by GitHub Actions.
+
+**Live:** <https://thevyasamit.github.io>
+
+> We are in a world where almost everything is virtual. Just like in the earlier
+> days of civilisation people used to have a home/mailing address, I believe now
+> is the time where people should have an e-address for their presence in this
+> vast, web-dominating world in addition to their physical presence.
+
+---
+
+## Contents
+
+- [Adding a post](#adding-a-post)
+- [Editing everything else](#editing-everything-else)
+- [Repository layout](#repository-layout)
+- [Running locally](#running-locally)
+- [What's used](#whats-used)
+- [SEO & discoverability](#seo--discoverability)
+- [Accessibility](#accessibility)
+- [Deployment](#deployment)
+- [The footer year](#the-footer-year)
+
+---
+
+## Adding a post
+
+One Markdown file in `_posts/`, named `YYYY-MM-DD-some-slug.md`:
+
+```markdown
+---
+title: "The title of the post"
+date: 2026-09-01
+tags: [ai, engineering]
+description: >-
+  One or two sentences. This is what shows in the post list, in Google
+  results and on social cards — worth writing properly.
+---
+
+Body goes here, in Markdown.
+```
+
+Push to `master`. The post then appears at `/writing/some-slug/` and is added
+**automatically** to:
+
+| Surface                   | How                                        |
+| ------------------------- | ------------------------------------------ |
+| Writing index             | `writing/index.html` loops `site.posts`     |
+| Tag filter chips          | Derived from `site.tags` — new tags just work |
+| Full-text search          | `search.json` is regenerated at build time  |
+| `sitemap.xml`             | `jekyll-sitemap`                            |
+| `feed.xml` (RSS)          | `jekyll-feed`                               |
+| `llms.txt`                | Loops `site.posts`                          |
+| JSON-LD `BlogPosting`     | `_includes/schema.html`                     |
+
+Nothing is hardcoded per-post. Tags are free-form.
+
+Unpublished drafts go in `_drafts/` (no date in the filename); preview them with
+`bundle exec jekyll serve --drafts`.
+
+## Editing everything else
+
+No HTML required — the content is YAML, the templates just render it.
+
+| File                     | Controls                                              |
+| ------------------------ | ----------------------------------------------------- |
+| `_data/home.yml`         | Homepage intro, quote, call-to-action, About paragraphs |
+| `_data/experience.yml`   | Experience timeline (newest first; `current: true` adds the badge) |
+| `_data/publications.yml` | Publications list                                     |
+| `_data/education.yml`    | Education list                                        |
+| `_data/social.yml`       | Sidebar icon links (`icon` maps to a symbol in `_includes/icons.html`) |
+| `_data/nav.yml`          | Sidebar navigation items                              |
+| `_config.yml`            | Name, role, org, description, social handles, timezone |
+
+Every homepage section is wrapped in a presence check, so emptying a data file
+removes that section cleanly instead of leaving an empty heading behind.
+
+Adding a new social link needs an `<svg><symbol id="i-yourname">` in
+`_includes/icons.html` plus an entry in `_data/social.yml`.
+
+## Repository layout
+
+```
+├── _config.yml              site config + build settings
+├── Gemfile                  dependencies (lockfile is gitignored;
+│                             CI resolves fresh — see note below)
+├── _data/                   ALL editable content (YAML)
+├── _layouts/                default → page / post
+├── _includes/               head, sidebar, footer, icons, schema
+├── _posts/                  the writing (Markdown)
+├── _drafts/                 unpublished writing
+├── writing/index.html       post index: tag filter + search
+├── index.html               homepage
+├── 404.html
+├── assets/
+│   ├── css/main.css         one stylesheet, tokenised
+│   ├── js/site.js           theme toggle, mobile nav, heading anchors
+│   ├── js/writing.js        tag filtering + full-text search
+│   └── favicon.png
+├── images/                  portrait, logo, derived icons, OG card
+├── search.json              full-text index, generated at build
+├── llms.txt                 plain-text site summary for AI agents
+├── robots.txt
+├── site.webmanifest
+└── .github/workflows/       build+deploy, footer-year refresh
+```
+
+## Running locally
+
+```bash
+bundle install
+bundle exec jekyll serve          # http://127.0.0.1:4000
+bundle exec jekyll serve --drafts # include drafts
+```
+
+Needs Ruby 3.0+ — macOS system Ruby (2.6) is too old, so `brew install ruby`
+and make sure it precedes `/usr/bin` on your `PATH`.
+
+`Gemfile.lock` is intentionally **not** committed. It gets generated by
+whichever Ruby you have locally, which may be far newer than the Ruby the
+Actions runner uses; committing it can pin a `BUNDLED WITH` version CI cannot
+install. The `Gemfile` uses `~>` constraints, so CI resolves compatible
+versions on its own. If you ever want fully reproducible builds, commit the
+lockfile *and* match `ruby-version` in `deploy.yml` to your local Ruby.
+
+## What's used
+
+Deliberately small. No framework, no bundler, no CDN, no tracking, no cookies.
+
+| Thing | Why |
+| ----- | --- |
+| [Jekyll 4](https://jekyllrb.com/) | Static site generator; native to GitHub Pages |
+| [jekyll-seo-tag](https://github.com/jekyll/jekyll-seo-tag) | Canonical URLs, Open Graph, Twitter card meta |
+| [jekyll-sitemap](https://github.com/jekyll/jekyll-sitemap) | `sitemap.xml` |
+| [jekyll-feed](https://github.com/jekyll/jekyll-feed) | RSS/Atom feed |
+| [Rouge](https://github.com/rouge-ruby/rouge) | Syntax highlighting |
+| [html-proofer](https://github.com/gjtorikian/html-proofer) | Broken-link/HTML check in CI |
+| GitHub Actions + Pages | Build and hosting, free |
+| Vanilla JS (~6 KB, no deps) | Theme toggle, nav, tag filter, search |
+| System font stack | Zero webfont downloads, native look per-OS |
+| Hand-rolled inline SVG sprite | Replaced Font Awesome (~70 KB CSS + webfonts) with ~2 KB |
+
+Total first paint is roughly **63 KB** with zero external requests.
+
+**Credits:** the site is written from scratch. Earlier versions used an
+[HTML5 UP](https://html5up.net/) template; none of that code remains.
+The AV monogram is my own logo.
+
+## SEO & discoverability
+
+- Every post is a **real page at its own URL** with its own `<title>`,
+  meta description and canonical link — the thing that actually gets indexed.
+- `sitemap.xml`, `robots.txt` (with the sitemap declared) and an RSS feed.
+- schema.org JSON-LD: `Person` + `WebSite` (with a `SearchAction` pointing at
+  `/writing/?q=`) on the homepage, `BlogPosting` on every post.
+- Open Graph + Twitter `summary_large_image` card (`images/og-card.png`).
+- Favicon is a **square, 96×96** PNG (a multiple of 48, which is what Google
+  requires to show an icon beside a search result) and is crawlable.
+- **For AI agents:** `llms.txt` gives a plain-text summary of the site, the
+  post list, current role and publications; `search.json` exposes full post
+  text as JSON. Both are linked from `<head>` and the footer, and `robots.txt`
+  welcomes crawlers.
+
+After the first deploy, submit the sitemap once in
+[Google Search Console](https://search.google.com/search-console) to speed up
+indexing.
+
+## Accessibility
+
+Targets WCAG 2.1 AA.
+
+- Skip-to-content link, semantic landmarks, one `<h1>` per page, no heading skips.
+- All colour pairs meet AA — body text ≥ 4.5:1, control borders ≥ 3:1
+  (`--border-strong`) in **both** themes. Ratios are noted in `main.css`.
+- Filter and search are **progressive enhancement**: the full post list is
+  rendered server-side and works with JavaScript disabled.
+- Real `<button>`/`<input>` elements with labels, `aria-pressed`, `aria-current`,
+  and an `aria-live` region announcing result counts.
+- Visible focus rings, Escape closes the mobile nav, `prefers-reduced-motion`
+  and `forced-colors` respected, plus a print stylesheet.
+
+## Deployment
+
+`.github/workflows/deploy.yml` runs on every push to `master`: builds with
+`JEKYLL_ENV=production`, runs html-proofer over the output to catch broken
+links, then publishes to GitHub Pages.
+
+**Repo setting required:** Settings → Pages → Build and deployment →
+Source = **GitHub Actions**.
+
+## The footer year
+
+The copyright year is rendered at build time from `site.time`
+(`_includes/footer.html`), with the site timezone pinned to `Etc/UTC`, so it is
+correct on every deploy. `.github/workflows/refresh-year.yml` forces a redeploy
+at **00:10 UTC on 1 January** so the year rolls over even in a year with no
+commits, with a monthly run as a safety net. No bot ever commits to the repo.
+
+Why just after midnight and not `23:59` on 31 December: `site.time` reads the
+*build* clock, so a build starting at 23:59 would still render the old year.
+Verified:
+
+| Build clock (UTC)     | Footer renders |
+| --------------------- | -------------- |
+| 2026-12-31 23:59      | © 2026 ❌       |
+| 2027-01-01 00:10      | © 2027 ✅       |
+
+> [!NOTE]
+> GitHub disables scheduled workflows after **60 days without repository
+> activity** (it emails you first). If you go a couple of months without
+> pushing, re-enable it from the Actions tab — one click.
+
+## Licence
+
+Code is free to reuse. Post content and the AV logo are © Amit Vyas.

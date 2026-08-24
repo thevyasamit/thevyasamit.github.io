@@ -1,0 +1,31 @@
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
+<meta name="theme-color" content="#111315" media="(prefers-color-scheme: dark)">
+
+{%- comment -%} Sets the theme before first paint so there is no light/dark flash. {%- endcomment -%}
+<script>
+  (function () {
+    try {
+      var s = localStorage.getItem('theme');
+      var t = s || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      document.documentElement.setAttribute('data-theme', t);
+    } catch (e) {
+      document.documentElement.setAttribute('data-theme', 'light');
+    }
+  })();
+</script>
+
+{%- seo -%}
+{%- feed_meta -%}
+
+<link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
+<link rel="icon" href="{{ '/assets/favicon.png' | relative_url }}" type="image/png" sizes="96x96">
+<link rel="apple-touch-icon" sizes="180x180" href="{{ '/images/apple-touch-icon.png' | relative_url }}">
+<link rel="manifest" href="{{ '/site.webmanifest' | relative_url }}">
+<link rel="sitemap" type="application/xml" href="{{ '/sitemap.xml' | relative_url }}">
+{%- comment -%} A plain-text summary of the site, for LLM agents. {%- endcomment -%}
+<link rel="alternate" type="text/plain" href="{{ '/llms.txt' | relative_url }}" title="Plain-text site summary for AI agents">
+
+{% include schema.html %}

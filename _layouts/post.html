@@ -1,0 +1,54 @@
+---
+layout: default
+---
+<article class="prose post" itemscope itemtype="https://schema.org/BlogPosting">
+  <nav class="breadcrumb" aria-label="Breadcrumb">
+    <ol>
+      <li><a href="{{ '/' | relative_url }}">Home</a></li>
+      <li><a href="{{ '/writing/' | relative_url }}">Writing</a></li>
+      <li aria-current="page">{{ page.title }}</li>
+    </ol>
+  </nav>
+
+  <header class="page-header">
+    <h1 itemprop="headline">{{ page.title }}</h1>
+    <p class="post__meta">
+      <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
+        {{ page.date | date: "%B %-d, %Y" }}
+      </time>
+      {%- if page.reading_time_hidden != true %}
+      <span aria-hidden="true">&middot;</span>
+      <span>{% assign words = content | number_of_words %}{% if words < 360 %}1{% else %}{{ words | divided_by: 180 }}{% endif %} min read</span>
+      {%- endif %}
+    </p>
+    {% if page.tags and page.tags.size > 0 %}
+    <ul class="tags" aria-label="Tags">
+      {% for tag in page.tags %}
+      <li><a class="tag" href="{{ '/writing/' | relative_url }}?tag={{ tag | uri_escape }}">{{ tag }}</a></li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+  </header>
+
+  <div class="post__body" itemprop="articleBody">
+    {{ content }}
+  </div>
+
+  <footer class="post__footer">
+    <nav class="post-nav" aria-label="More writing">
+      {%- if page.next %}
+      <a class="post-nav__item" href="{{ page.next.url | relative_url }}" rel="next">
+        <span class="post-nav__dir">Newer</span>
+        <span class="post-nav__title">{{ page.next.title }}</span>
+      </a>
+      {%- endif %}
+      {%- if page.previous %}
+      <a class="post-nav__item post-nav__item--next" href="{{ page.previous.url | relative_url }}" rel="prev">
+        <span class="post-nav__dir">Older</span>
+        <span class="post-nav__title">{{ page.previous.title }}</span>
+      </a>
+      {%- endif %}
+    </nav>
+    <p class="post__back"><a href="{{ '/writing/' | relative_url }}">&larr; All writing</a></p>
+  </footer>
+</article>

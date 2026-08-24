@@ -1,0 +1,16 @@
+# `icon` maps to a <symbol> id in _includes/icons.html
+- name: GitHub
+  icon: github
+  url: https://github.com/thevyasamit
+- name: LinkedIn
+  icon: linkedin
+  url: https://www.linkedin.com/in/thevyasamit/
+- name: Google Scholar
+  icon: scholar
+  url: https://scholar.google.com/citations?user=6D2uXYEAAAAJ&hl=en
+- name: X (Twitter)
+  icon: x
+  url: https://twitter.com/thevyasamit
+- name: RSS
+  icon: rss
+  url: /feed.xml

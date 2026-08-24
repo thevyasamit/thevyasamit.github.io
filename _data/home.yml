@@ -1,0 +1,31 @@
+# Everything on the homepage that is prose rather than structure.
+# Inline HTML is allowed (links, <em>, &mdash; and friends).
+
+intro:
+  lede: >-
+    I'm a software engineer and researcher. I build the plumbing that makes AI
+    research usable &mdash; APIs, infrastructure and developer tooling &mdash;
+    at the <a href="https://icicle.osu.edu/">ICICLE AI Institute</a>,
+    The Ohio State University.
+  quote: I'm a human trying to understand AI before AI starts understanding humans.
+  cta:
+    label: Read my writing
+    url: /writing/
+
+# Each list item is one paragraph.
+about:
+  - >-
+    I work at the intersection of research and production software. Day to day
+    that means designing REST APIs and OpenAPI specifications, running services
+    on Kubernetes, wrangling data pipelines, and writing the documentation that
+    makes any of it usable by someone who wasn't in the room when it was built.
+  - >-
+    Before Ohio State I spent time building Python backends in industry, and
+    before that I was a research assistant working on 3D object detection and
+    multi-camera sensor fusion for autonomous driving. That mix &mdash; shipping
+    systems and publishing papers &mdash; is the thread through most of what I do.
+
+sections:
+  publications:
+    more_label: Full list on Google Scholar
+    more_url: https://scholar.google.com/citations?user=6D2uXYEAAAAJ&hl=en

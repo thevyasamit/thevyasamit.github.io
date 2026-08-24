@@ -1,0 +1,81 @@
+---
+layout: default
+title: Writing
+description: Essays and notes on AI, software engineering, research and health by Amit Vyas.
+permalink: /writing/
+search: true
+---
+
+<header class="page-header">
+  <h1>Writing</h1>
+  <p class="page-header__lede">
+    Notes and essays, mostly on AI, engineering and the places they meet
+    everything else. <a href="{{ '/feed.xml' | relative_url }}">Subscribe via RSS</a>.
+  </p>
+</header>
+
+{%- comment -%}
+  The full list is rendered server-side, so the page works with JavaScript
+  disabled and every post is visible to crawlers. JS only filters what is
+  already here.
+{%- endcomment -%}
+
+<div class="filters" data-filters hidden>
+  <div class="search">
+    <label class="u-visually-hidden" for="search-input">Search writing</label>
+    <svg class="icon search__icon" aria-hidden="true"><use href="#i-search"></use></svg>
+    <input type="search" id="search-input" name="q" placeholder="Search posts&hellip;"
+           autocomplete="off" spellcheck="false"
+           aria-describedby="filter-status">
+    <button type="button" class="search__clear" hidden aria-label="Clear search">&times;</button>
+  </div>
+
+  {%- assign tags = site.tags | sort %}
+  {%- if tags.size > 0 %}
+  <div class="tagbar" role="group" aria-label="Filter by tag">
+    <button type="button" class="tag tag--all is-active" data-tag="" aria-pressed="true">All</button>
+    {%- for t in tags %}
+    <button type="button" class="tag" data-tag="{{ t[0] }}" aria-pressed="false">
+      {{ t[0] }} <span class="tag__count">{{ t[1].size }}</span>
+    </button>
+    {%- endfor %}
+  </div>
+  {%- endif %}
+
+  <p class="filter-status" id="filter-status" role="status" aria-live="polite"></p>
+</div>
+
+<ol class="posts" data-posts>
+  {%- for post in site.posts %}
+  <li class="post-card"
+      data-tags="{{ post.tags | join: '|' }}"
+      data-url="{{ post.url | relative_url }}">
+    <article>
+      <h2 class="post-card__title">
+        <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+      </h2>
+      <p class="post-card__meta">
+        <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time>
+        {%- if post.tags.size > 0 %}
+        <span aria-hidden="true">&middot;</span>
+        <span class="post-card__tags">{{ post.tags | join: ", " }}</span>
+        {%- endif %}
+      </p>
+      <p class="post-card__excerpt">
+        {{ post.description | default: post.excerpt | strip_html | strip_newlines | truncate: 190 }}
+      </p>
+      <span class="post-card__more" aria-hidden="true">
+        Read <svg class="icon"><use href="#i-arrow"></use></svg>
+      </span>
+    </article>
+  </li>
+  {%- endfor %}
+</ol>
+
+<p class="empty-state" data-empty hidden>
+  No posts match that. <button type="button" class="link-button" data-reset>Clear filters</button>
+</p>
+
+{%- if site.posts.size == 0 %}
+<p class="empty-state">Nothing published yet &mdash; check back soon.</p>
+{%- endif %}

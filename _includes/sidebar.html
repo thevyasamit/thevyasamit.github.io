@@ -1,0 +1,62 @@
+{%- assign home = '/' | relative_url -%}
+<header class="sidebar" id="sidebar">
+  <div class="sidebar__inner">
+
+    <div class="profile">
+      <a class="profile__link" href="{{ home }}">
+        <img class="profile__img"
+             src="{{ '/images/av-320.jpg' | relative_url }}"
+             srcset="{{ '/images/av-320.jpg' | relative_url }} 320w,
+                     {{ '/images/av.jpg' | relative_url }} 900w"
+             sizes="(min-width: 60em) 136px, 36px"
+             alt="Portrait of {{ site.author.name }}"
+             width="320" height="369"
+             fetchpriority="high" decoding="async">
+        <span class="profile__name">{{ site.author.name }}</span>
+      </a>
+      <p class="profile__role">{{ site.author.role }}</p>
+      <p class="profile__org">{{ site.author.org }}</p>
+    </div>
+
+    <button class="nav-toggle" type="button"
+            aria-expanded="false" aria-controls="primary-nav"
+            aria-label="Open navigation menu">
+      <svg class="icon" aria-hidden="true"><use href="#i-menu"></use></svg>
+      <span>Menu</span>
+    </button>
+
+    <nav class="nav" id="primary-nav" aria-label="Primary">
+      <ul>
+        {%- for item in site.data.nav %}
+        {%- assign current = false -%}
+        {%- if item.match == 'exact' and page.url == '/' %}{% assign current = true %}
+        {%- elsif item.match and item.match != 'exact' and page.url contains item.match %}{% assign current = true %}
+        {%- endif %}
+        <li>
+          <a href="{{ item.url | relative_url }}"{% if current %} aria-current="page"{% endif %}>{{ item.label }}</a>
+        </li>
+        {%- endfor %}
+      </ul>
+    </nav>
+
+    <ul class="social" aria-label="Elsewhere on the web">
+      {%- for s in site.data.social -%}
+      <li>
+        <a href="{% if s.url contains '://' %}{{ s.url }}{% else %}{{ s.url | relative_url }}{% endif %}"
+           title="{{ s.name }}"
+           {% if s.url contains '://' %}rel="me noopener"{% endif %}>
+          <svg class="icon" aria-hidden="true"><use href="#i-{{ s.icon }}"></use></svg>
+          <span class="u-visually-hidden">{{ s.name }}</span>
+        </a>
+      </li>
+      {%- endfor -%}
+    </ul>
+
+    <button class="theme-toggle" type="button" id="theme-toggle" aria-pressed="false">
+      <svg class="icon icon--sun" aria-hidden="true"><use href="#i-sun"></use></svg>
+      <svg class="icon icon--moon" aria-hidden="true"><use href="#i-moon"></use></svg>
+      <span class="theme-toggle__label">Dark mode</span>
+    </button>
+
+  </div>
+</header>

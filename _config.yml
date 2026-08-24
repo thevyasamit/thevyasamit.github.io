@@ -1,7 +1,81 @@
+# ---------------------------------------------------------------------------
+# Site
+# ---------------------------------------------------------------------------
 title: Amit Vyas
-description: Software Engineer & Researcher
-baseurl: ""
+tagline: Software Engineer & Researcher
+description: >-
+  Amit Vyas is a software engineer and researcher at the ICICLE AI Institute,
+  The Ohio State University, working on AI infrastructure, APIs and applied
+  machine learning. Writing on AI, engineering and health.
 url: "https://thevyasamit.github.io"
+baseurl: ""
+lang: en_US
+# UTC so the footer year rolls over exactly at 00:00 UTC on 1 Jan,
+# which is what .github/workflows/refresh-year.yml schedules against.
+timezone: Etc/UTC
 
-# Build settings
-markdown: kramdown 
+author:
+  name: Amit Vyas
+  twitter: thevyasamit
+  role: Software Engineer, AI
+  org: ICICLE AI Institute, The Ohio State University
+  location: Columbus, OH, United States
+
+# Used by jekyll-seo-tag for social cards.
+image: /images/av.jpg
+twitter:
+  username: thevyasamit
+  card: summary_large_image
+social:
+  name: Amit Vyas
+  links:
+    - https://github.com/thevyasamit
+    - https://www.linkedin.com/in/thevyasamit/
+    - https://twitter.com/thevyasamit
+    - https://scholar.google.com/citations?user=6D2uXYEAAAAJ&hl=en
+
+# ---------------------------------------------------------------------------
+# Build
+# ---------------------------------------------------------------------------
+markdown: kramdown
+highlighter: rouge
+kramdown:
+  input: GFM
+  syntax_highlighter: rouge
+  auto_ids: true          # heading anchors -> deep-linkable, better for AI + humans
+
+permalink: /writing/:slug/
+paginate: false
+future: false
+
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+  - jekyll-feed
+
+feed:
+  path: /feed.xml
+
+defaults:
+  - scope: { path: "" }
+    values:
+      image: /images/og-card.png   # jekyll-seo-tag reads page.image only
+  - scope: { path: "", type: posts }
+    values:
+      layout: post
+      sitemap: true
+  - scope: { path: "" }
+    values:
+      layout: page
+
+sass:
+  style: compressed
+
+exclude:
+  - Gemfile
+  - Gemfile.lock
+  - vendor
+  - README.md
+  - .github
+  - scripts
+  - "*.gem"

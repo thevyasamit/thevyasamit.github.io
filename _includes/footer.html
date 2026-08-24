@@ -1,0 +1,14 @@
+{%- comment -%}
+  The year is rendered at build time from site.time, so it is correct on every
+  deploy. .github/workflows/refresh-year.yml redeploys just after New Year UTC
+  so the site rolls over even if nothing was committed.
+{%- endcomment -%}
+<footer class="footer">
+  <p>&copy; {{ site.time | date: '%Y' }} {{ site.author.name }}.</p>
+  <p class="footer__meta">
+    Built with <a href="https://jekyllrb.com/">Jekyll</a>, hosted on GitHub Pages.
+    <a href="{{ '/feed.xml' | relative_url }}">RSS</a> &middot;
+    <a href="{{ '/sitemap.xml' | relative_url }}">Sitemap</a> &middot;
+    <a href="{{ '/llms.txt' | relative_url }}">llms.txt</a>
+  </p>
+</footer>

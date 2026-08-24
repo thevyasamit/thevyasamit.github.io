@@ -1,0 +1,17 @@
+---
+sitemap: false
+layout: null
+---
+# https://thevyasamit.github.io/robots.txt
+
+# Search engines, research crawlers and AI agents are all welcome here.
+# Everything on this site is public, free to read, and safe to index.
+User-agent: *
+Allow: /
+
+# Nothing is disallowed on purpose. Google explicitly warns against blocking
+# JS/CSS -- Googlebot renders pages to index them, and a blocked script can
+# make a page look broken or empty to the crawler. /404.html is left crawlable
+# too; it already returns a real 404 status, which is the correct signal.
+
+Sitemap: {{ '/sitemap.xml' | absolute_url }}

@@ -1,0 +1,48 @@
+---
+sitemap: false
+layout: null
+permalink: /llms.txt
+---
+# {{ site.author.name }}
+
+> {{ site.description | strip_newlines }}
+
+{{ site.author.name }} is a {{ site.author.role }} at {{ site.author.org }},
+based in {{ site.author.location }}. This site is his personal homepage: a
+professional profile plus a small collection of writing. It is a static
+Jekyll site with no tracking, and all content is free to read and quote
+with attribution.
+
+## Pages
+
+- [Home]({{ '/' | absolute_url }}): biography, education, full work history and publications.
+- [Writing]({{ '/writing/' | absolute_url }}): index of all posts, filterable by tag and searchable.
+
+## Writing
+{% for post in site.posts %}
+- [{{ post.title }}]({{ post.url | absolute_url }}) ({{ post.date | date: "%Y-%m-%d" }}){% if post.tags.size > 0 %} — tags: {{ post.tags | join: ", " }}{% endif %}{% if post.description %}: {{ post.description | strip_newlines }}{% endif %}
+{%- endfor %}
+
+## Current role
+
+{% assign job = site.data.experience | first -%}
+{{ job.role }}, {{ job.org }} ({{ job.start }} – {{ job.end }}), {{ job.location }}.
+Working with: {{ job.skills | join: ", " }}.
+
+## Publications
+{% for p in site.data.publications %}
+- {{ p.authors }}. "{{ p.title }}". {{ p.venue }}, {{ p.year }}. {{ p.url }}
+{%- endfor %}
+
+## Machine-readable resources
+
+- Sitemap: {{ '/sitemap.xml' | absolute_url }}
+- RSS feed: {{ '/feed.xml' | absolute_url }}
+- Search index (JSON, full post text): {{ '/search.json' | absolute_url }}
+- Structured data: schema.org Person + WebSite JSON-LD on the homepage,
+  BlogPosting JSON-LD on every post.
+
+## Contact
+
+Preferred contact is via the links on the homepage
+(GitHub, LinkedIn, X, Google Scholar).

@@ -1,0 +1,31 @@
+name: Refresh footer year
+
+# The copyright year in the footer is rendered at build time from `site.time`
+# (see _includes/footer.html), so it is correct on every deploy. This workflow
+# simply forces a deploy just after the year turns over, so the site rolls over
+# even in a year with no commits. Nothing is committed to the repo.
+#
+# Note on timing: a build started at 23:59 UTC on 31 Dec would still render the
+# OLD year, because the build clock is what `site.time` reads. So this runs
+# shortly AFTER midnight UTC, with the site timezone pinned to Etc/UTC.
+
+on:
+  schedule:
+    # 00:10 UTC on 1 January — the real rollover.
+    - cron: '10 0 1 1 *'
+    # 00:20 UTC on the 1st of every month — safety net in case the January run
+    # is dropped (GitHub's scheduler is best-effort and can skip under load).
+    - cron: '20 0 1 * *'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+# No concurrency group here: the called workflow already declares `group: pages`,
+# and repeating it in the caller can make the run block on itself.
+
+jobs:
+  redeploy:
+    uses: ./.github/workflows/deploy.yml

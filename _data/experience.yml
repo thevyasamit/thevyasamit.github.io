@@ -1,0 +1,59 @@
+# Reverse-chronological. `current: true` marks the present role.
+- org: The Ohio State University, ICICLE AI Institute
+  role: Software Engineer, AI
+  start: Jan 2025
+  end: Present
+  current: true
+  location: Columbus, OH, United States
+  skills: [Python, OpenAPI v3, Docusaurus, REST APIs, Kubernetes, Linux, PostgreSQL, HuggingFace, GitHub, GitHub Actions]
+
+- org: Computech Corporation
+  role: Software Engineer, Python Backend
+  start: Sep 2023
+  end: Jan 2025
+  location: Detroit, MI, United States
+  skills: [Django REST Framework, REST APIs, Data Analysis, RabbitMQ, PostgreSQL, MongoDB, OAuth 2.0 / OpenID (Azure Entra ID), Celery, Fernet & JWT, Linux]
+
+- org: Skillnet Solutions
+  role: Software Engineer
+  start: Jun 2023
+  end: Aug 2023
+  location: Twinsburg, OH, United States
+  skills: [Python, Java, Spring Boot, REST APIs, React, MS SQL Server, Linux]
+
+- org: Medical Mutual
+  role: IT Intern
+  start: May 2022
+  end: Aug 2022
+  location: Brooklyn, OH, United States
+  skills: [Groovy Scripting, Jira, Data Analysis, Dashboard Development]
+
+- org: ICAS Lab, Cleveland State University
+  role: Research Assistant
+  start: Oct 2021
+  end: May 2022
+  location: Cleveland, OH, United States
+  note: Intelligent Communications and Autonomous Systems Laboratory
+  skills: [3D Bounding Box Prediction, Multi-Camera Sensor Fusion, Python, PyTorch, OpenCV, Object Detection, YOLO]
+
+- org: Indian Institute of Technology Jodhpur
+  role: Senior Project Assistant
+  start: Oct 2020
+  end: Jan 2021
+  location: Jodhpur, India
+  note: "Smart Health Solutions for Rapid Mass Diagnosis for COVID-19"
+  skills: [Arduino, Flask, MongoDB, Sensor Data Processing, Web Development]
+
+- org: Accenture
+  role: Associate Software Engineer
+  start: Oct 2019
+  end: Jul 2020
+  location: Bangalore, India
+  skills: [MapReduce, HQL, Spark Streaming, Big Data, Data Analysis]
+
+- org: Unilever
+  role: Project Intern
+  start: Jan 2019
+  end: Jun 2019
+  location: Bangalore, India
+  skills: [YOLO, Object Detection, HTML, CSS, JavaScript, Azure Cloud]
