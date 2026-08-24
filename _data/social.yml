@@ -11,6 +11,3 @@
 - name: X (Twitter)
   icon: x
   url: https://twitter.com/thevyasamit
-- name: RSS
-  icon: rss
-  url: /feed.xml

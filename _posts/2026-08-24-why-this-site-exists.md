@@ -31,7 +31,6 @@ Roughly three things, which is also roughly what I spend my days on:
 Posts are plain Markdown files in `_posts/`. The site is Jekyll on GitHub
 Pages, so publishing is a `git push` — no CMS, no database, nothing to keep
 patched. Everything is filterable by tag and searchable from the
-[writing index](/writing/), and there's an [RSS feed](/feed.xml) if you'd
-rather not check back manually.
+[writing index](/writing/).
 
 No newsletter, no popups, no tracking. Just the words.
