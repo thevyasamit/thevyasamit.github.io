@@ -213,8 +213,28 @@ Cookieless, so no consent banner is required.
 `JEKYLL_ENV=production`, runs html-proofer over the output to catch broken
 links, then publishes to GitHub Pages.
 
+Pull requests run the same build and link-check but skip the deploy job, so
+`build` works as a required status check without ever publishing from a PR.
+Both `master` and `main` are watched, so renaming the default branch cannot
+silently stop deploys.
+
 **Repo setting required:** Settings → Pages → Build and deployment →
-Source = **GitHub Actions**.
+Source = **GitHub Actions**. Until this is set, GitHub's legacy Jekyll
+builder also runs on every push and its deploy step collides with this
+workflow's, producing spurious failure emails.
+
+### Branch protection
+
+This repo is public, so rulesets are free. Settings → Rules → Rulesets →
+New branch ruleset, targeting the default branch:
+
+- Restrict deletions, block force pushes
+- Require a pull request before merging, with **0 required approvals**
+- Require status checks to pass: **`build`**
+
+Zero approvals is deliberate: GitHub does not let you approve your own pull
+request, so on a solo repo requiring even one approval blocks every PR you
+open. Zero still forces the PR flow and still gates merges on a green build.
 
 ## The footer year
 

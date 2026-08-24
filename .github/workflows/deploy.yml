@@ -2,18 +2,21 @@ name: Build & deploy
 
 on:
   push:
-    branches: [master]
+    branches: [master, main]      # both, so renaming the default branch cannot silently stop deploys
+  pull_request:
+    branches: [master, main]      # build + link-check only; the deploy job is skipped
   workflow_dispatch:
-  workflow_call:        # invoked by refresh-year.yml
+  workflow_call:                  # invoked by refresh-year.yml
 
 permissions:
   contents: read
   pages: write
   id-token: write
 
-# Never let two deploys race; let an in-flight one finish.
+# Keyed by ref so a pull-request build never queues behind a live deploy.
+# Real deploys still serialise against each other on the branch ref.
 concurrency:
-  group: pages
+  group: pages-${{ github.ref }}
   cancel-in-progress: false
 
 jobs:
@@ -44,9 +47,12 @@ jobs:
             --no-enforce-https
 
       - uses: actions/upload-pages-artifact@v3
+        if: github.event_name != 'pull_request'
 
   deploy:
     needs: build
+    # Pull requests get validated, never published.
+    if: github.event_name != 'pull_request'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
