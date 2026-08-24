@@ -69,6 +69,79 @@
     });
   }
 
+  /* ------------------------------------------------------------ scrollspy */
+  /* Nav items like /#experience point at sections of the CURRENT page, so
+     Liquid's aria-current can never match them -- the URL never changes as
+     you scroll. Highlight whichever section is actually in view instead. */
+
+  var spyLinks = [];
+  var homeLink = null;
+
+  document.querySelectorAll('.nav a').forEach(function (a) {
+    var href = a.getAttribute('href') || '';
+    var hash = href.indexOf('#') > -1 ? href.slice(href.indexOf('#') + 1) : '';
+    if (!hash) {
+      // The plain page link (Home) is the fallback when nothing is in view.
+      if (a.getAttribute('aria-current') === 'page') homeLink = a;
+      return;
+    }
+    var target = document.getElementById(hash);
+    if (target) spyLinks.push({ link: a, target: target });
+  });
+
+  // Decides which entry is current. Split out so it can be unit-tested:
+  // `tops` are viewport-relative section offsets, in document order.
+  function pickActive(tops, line, atBottom) {
+    if (!tops.length) return -1;
+    if (atBottom) return tops.length - 1;
+    var active = -1;
+    for (var i = 0; i < tops.length; i++) {
+      if (tops[i] <= line) active = i;
+    }
+    return active;
+  }
+
+  if (spyLinks.length) {
+    // Offset the trigger line past the sticky header on small screens.
+    var headerOffset = function () {
+      var sb = document.getElementById('sidebar');
+      if (!sb) return 0;
+      var pos = window.getComputedStyle(sb).position;
+      return pos === 'sticky' && window.innerWidth < 960 ? sb.offsetHeight : 0;
+    };
+
+    var applySpy = function () {
+      var line = headerOffset() + 96;
+      var tops = spyLinks.map(function (s) { return s.target.getBoundingClientRect().top; });
+      var atBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2;
+      var idx = pickActive(tops, line, atBottom);
+
+      spyLinks.forEach(function (s, i) {
+        if (i === idx) s.link.setAttribute('aria-current', 'location');
+        else s.link.removeAttribute('aria-current');
+      });
+      if (homeLink) {
+        if (idx === -1) homeLink.setAttribute('aria-current', 'page');
+        else homeLink.removeAttribute('aria-current');
+      }
+    };
+
+    var ticking = false;
+    var onScroll = function () {
+      if (ticking) return;
+      ticking = true;
+      window.requestAnimationFrame(function () { applySpy(); ticking = false; });
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener('resize', onScroll);
+    window.addEventListener('hashchange', onScroll);
+    applySpy();
+
+    // Exposed only for tests; harmless in the browser.
+    window.__pickActive = pickActive;
+  }
+
   /* -------------------------------------------------- anchors on headings */
   var body = document.querySelector('.post__body');
   if (body) {
