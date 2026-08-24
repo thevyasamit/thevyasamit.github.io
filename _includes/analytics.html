@@ -1,0 +1,17 @@
+{%- comment -%}
+  Cloudflare Web Analytics: cookieless, so no consent banner is required.
+
+  Two guards, both load-bearing:
+    - jekyll.environment is "production" only in CI (the workflow sets
+      JEKYLL_ENV), so local `jekyll serve` never pollutes the stats.
+    - the token is compared against "" rather than tested for truthiness,
+      because Liquid treats an empty string as TRUE. Without this an unset
+      token would emit a beacon with token:"" and fail silently.
+{%- endcomment -%}
+{%- assign cf = site.analytics.cloudflare_token | default: "" -%}
+{%- if jekyll.environment == "production" and cf != "" -%}
+<!-- Cloudflare Web Analytics -->
+<script type="module" src="https://static.cloudflareinsights.com/beacon.min.js"
+        data-cf-beacon='{"token": "{{ cf }}"}'></script>
+<!-- End Cloudflare Web Analytics -->
+{%- endif -%}

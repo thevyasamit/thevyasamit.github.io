@@ -139,6 +139,7 @@ Deliberately small. No framework, no bundler, no CDN, no tracking, no cookies.
 | [Rouge](https://github.com/rouge-ruby/rouge) | Syntax highlighting |
 | [html-proofer](https://github.com/gjtorikian/html-proofer) | Broken-link/HTML check in CI |
 | GitHub Actions + Pages | Build and hosting, free |
+| [Cloudflare Web Analytics](https://developers.cloudflare.com/web-analytics/) | Traffic stats. Cookieless, ~2KB, free |
 | Vanilla JS (~6 KB, no deps) | Theme toggle, nav, tag filter, search |
 | System font stack | Zero webfont downloads, native look per-OS |
 | Hand-rolled inline SVG sprite | Replaced Font Awesome (~70 KB CSS + webfonts) with ~2 KB |
@@ -181,6 +182,30 @@ Targets WCAG 2.1 AA.
   and an `aria-live` region announcing result counts.
 - Visible focus rings, Escape closes the mobile nav, `prefers-reduced-motion`
   and `forced-colors` respected, plus a print stylesheet.
+
+## Analytics
+
+Cloudflare Web Analytics, configured by `analytics.cloudflare_token` in
+`_config.yml` and rendered by `_includes/analytics.html`.
+
+The token is **public by design** -- it ships in the HTML of every page, so it
+is committed deliberately rather than hidden. It is write-only and
+hostname-bound: Cloudflare rejects beacons whose hostname does not
+postfix-match the one registered in the dashboard, and it cannot be used to
+read any data. Rotate it by deleting and re-adding the site in Cloudflare.
+
+The beacon only renders when `jekyll.environment` is `production`, so local
+`jekyll serve` never pollutes the stats. The token is compared against `""`
+rather than tested for truthiness, because Liquid treats an empty string as
+true -- without that, an unset token would emit a beacon with `token:""` and
+fail silently. Blank the value to disable analytics entirely.
+
+Cookieless, so no consent banner is required.
+
+> [!IMPORTANT]
+> If the site moves to a custom domain, register that hostname in the
+> Cloudflare dashboard too. Otherwise the hostname check fails and analytics
+> silently drop to zero -- no error, just an empty dashboard.
 
 ## Deployment
 

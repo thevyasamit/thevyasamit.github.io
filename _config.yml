@@ -55,6 +55,21 @@ plugins:
 feed:
   path: /feed.xml
 
+# ---------------------------------------------------------------------------
+# Analytics
+# ---------------------------------------------------------------------------
+# Cloudflare Web Analytics. This token is a PUBLIC site identifier -- it ships
+# in the HTML of every page, so it is committed deliberately, not leaked.
+# It is write-only and hostname-bound: Cloudflare rejects beacons whose
+# hostname does not postfix-match the one registered in the dashboard, and the
+# token cannot be used to READ any data.
+#
+# NOTE: if the site ever moves to a custom domain, add that hostname in the
+# Cloudflare dashboard too, or analytics will silently drop to zero.
+# Leave blank to disable.
+analytics:
+  cloudflare_token: "1de6b7b8165a4442afa34edb453e5f88"
+
 defaults:
   - scope: { path: "" }
     values:
