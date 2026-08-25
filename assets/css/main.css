@@ -414,6 +414,31 @@ th { font-weight: 600; }
 
 .tags { list-style: none; padding: 0; display: flex; flex-wrap: wrap; gap: 0.35rem; }
 
+/* Provenance label. Shaped deliberately unlike a topic chip -- square rather
+   than pill, with an icon -- so "AI" and "AI-written" never read alike. */
+.post__labels {
+  margin-top: 0.9rem;
+  display: flex; flex-wrap: wrap; align-items: center;
+  gap: 0.5rem 0.75rem;
+}
+
+.authorship {
+  display: inline-flex; align-items: center; gap: 0.35rem;
+  padding: 0.2rem 0.55rem;
+  font-size: 0.78rem; font-weight: 600;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-strong);
+  color: var(--text-muted);
+  background: var(--surface);
+  cursor: help;
+}
+.authorship .icon { width: 0.85rem; height: 0.85rem; }
+.authorship--ai-written { color: var(--accent); border-color: var(--accent); background: var(--accent-soft); }
+
+.post__labels .tags { margin-left: auto; }
+
+.post-card__auth { color: var(--text-faint); }
+
 .filter-status { font-size: var(--step--1); color: var(--text-faint); min-height: 1.2em; }
 .filter-status:empty { display: none; }
 

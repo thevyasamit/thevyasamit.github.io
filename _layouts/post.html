@@ -16,18 +16,48 @@ layout: default
       <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
         {{ page.date | date: "%B %-d, %Y" }}
       </time>
+      {%- if page.last_modified_at %}
+      <span aria-hidden="true">&middot;</span>
+      <span>Updated
+        <time datetime="{{ page.last_modified_at | date_to_xmlschema }}" itemprop="dateModified">
+          {{ page.last_modified_at | date: "%B %-d, %Y" }}
+        </time>
+      </span>
+      {%- endif %}
       {%- if page.reading_time_hidden != true %}
       <span aria-hidden="true">&middot;</span>
       <span>{% assign words = content | number_of_words %}{% if words < 360 %}1{% else %}{{ words | divided_by: 180 }}{% endif %} min read</span>
       {%- endif %}
     </p>
-    {% if page.tags and page.tags.size > 0 %}
-    <ul class="tags" aria-label="Tags">
-      {% for tag in page.tags %}
-      <li><a class="tag" href="{{ '/writing/' | relative_url }}?tag={{ tag | uri_escape }}">{{ tag }}</a></li>
-      {% endfor %}
-    </ul>
-    {% endif %}
+
+    {%- assign auth = site.data.authorship | where: "slug", page.authorship | first %}
+    {%- if auth or page.tags.size > 0 %}
+    <div class="post__labels">
+      {%- if auth %}
+      {%- comment -%}
+        Provenance is deliberately a different shape from the topic chips below.
+        If it looked like a tag, "AI" and "AI-written" would read as the same
+        kind of thing, which is exactly the confusion worth avoiding.
+      {%- endcomment -%}
+      <span class="authorship authorship--{{ auth.slug }}" title="{{ auth.description }}">
+        <svg class="icon" aria-hidden="true"><use href="#i-{{ auth.icon }}"></use></svg>
+        <span class="u-visually-hidden">Authorship: </span>{{ auth.label }}
+      </span>
+      {%- endif %}
+
+      {%- if page.tags.size > 0 %}
+      <ul class="tags" aria-label="Topics">
+        {%- for tag in page.tags %}
+        {%- assign t = site.data.tags | where: "slug", tag | first %}
+        <li>
+          <a class="tag" href="{{ '/writing/' | relative_url }}?tag={{ tag | uri_escape }}"
+             {% if t.description %}title="{{ t.description }}"{% endif %}>{{ t.label | default: tag }}</a>
+        </li>
+        {%- endfor %}
+      </ul>
+      {%- endif %}
+    </div>
+    {%- endif %}
   </header>
 
   <div class="post__body" itemprop="articleBody">

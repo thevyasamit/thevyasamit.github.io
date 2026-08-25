@@ -1,7 +1,10 @@
 ---
 title: "Why this site exists"
 date: 2026-08-24
-tags: [meta, writing]
+tags: [tech, software]
+# I drafted this post, so it is disclosed as such. Change to human-written
+# once you rewrite it in your own words.
+authorship: ai-written
 description: >-
   A short note on what I plan to write here, and why a personal site still
   beats posting into someone else's feed.

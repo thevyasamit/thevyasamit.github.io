@@ -20,6 +20,21 @@
 {%- seo -%}
 {%- feed_meta -%}
 
+{%- comment -%}
+  jekyll-seo-tag emits og:type=article and article:published_time, but not
+  the author or tag properties. LinkedIn and Facebook read these.
+{%- endcomment -%}
+{%- if page.layout == 'post' -%}
+<meta property="article:author" content="{{ site.author.name }}">
+{%- if page.last_modified_at %}
+<meta property="article:modified_time" content="{{ page.last_modified_at | date_to_xmlschema }}">
+{%- endif %}
+{%- for tag in page.tags %}
+{%- assign t = site.data.tags | where: 'slug', tag | first %}
+<meta property="article:tag" content="{{ t.label | default: tag }}">
+{%- endfor -%}
+{%- endif -%}
+
 <link rel="stylesheet" href="{{ '/assets/css/main.css' | relative_url }}">
 <link rel="icon" href="{{ '/assets/favicon.png' | relative_url }}" type="image/png" sizes="96x96">
 <link rel="apple-touch-icon" sizes="180x180" href="{{ '/images/apple-touch-icon.png' | relative_url }}">

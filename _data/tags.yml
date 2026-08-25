@@ -1,0 +1,60 @@
+# ---------------------------------------------------------------------------
+# Controlled vocabulary of TOPIC tags.
+# ---------------------------------------------------------------------------
+# This file is the single source of truth. Everything derives from it:
+# the filter chips on /writing/, the `keywords` in each post's schema.org
+# JSON-LD, the og:article:tag meta tags, and the build-time validation.
+#
+# To ADD a tag:    append an entry here, then use its `slug` in post front matter.
+# To REMOVE a tag: delete the entry. The build will then FAIL and name every
+#                  post still using it, so a tag can never vanish silently.
+#
+#   slug        what you type in front matter; also the ?tag= URL value.
+#               lowercase and hyphenated -- avoids case and URL-encoding bugs.
+#   label       what readers see.
+#   description used as the tag's meaning; keep it one line.
+#
+# Order here is the order the filter chips appear in.
+# ---------------------------------------------------------------------------
+
+# --- The on-ramp: broad first, then progressively more specialised ---
+- slug: tech
+  label: Tech
+  description: Technology broadly, written to be readable without a background in it.
+
+- slug: ai
+  label: AI
+  description: Machine learning and language models, for readers already inside the field.
+
+- slug: software
+  label: Software
+  description: Engineering practice - APIs, systems, infrastructure and tooling.
+
+- slug: gpu
+  label: GPU
+  description: Accelerators and the hardware modern AI actually runs on.
+
+- slug: cpu
+  label: CPU
+  description: Processors, architecture and general-purpose compute.
+
+# --- Everything else ---
+- slug: business
+  label: Business
+  description: How companies, products and industries actually operate.
+
+- slug: economy
+  label: Economy
+  description: Economics, labour and the macro picture.
+
+- slug: finance
+  label: Finance
+  description: Markets, capital and money.
+
+- slug: society
+  label: Society
+  description: The social consequences of technology and everything around it.
+
+- slug: psychology
+  label: Psychology
+  description: Minds, behaviour and how people think.

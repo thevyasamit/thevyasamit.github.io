@@ -33,6 +33,11 @@ jobs:
       - uses: actions/configure-pages@v5
         id: pages
 
+      # Runs before the build so a bad tag fails fast with a clear message
+      # rather than silently producing an orphan tag nobody can filter by.
+      - name: Validate post front matter
+        run: ruby script/validate-content.rb
+
       - name: Build site
         env:
           JEKYLL_ENV: production

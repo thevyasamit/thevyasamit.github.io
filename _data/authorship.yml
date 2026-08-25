@@ -1,0 +1,31 @@
+# ---------------------------------------------------------------------------
+# Controlled vocabulary for the `authorship:` front matter field.
+# ---------------------------------------------------------------------------
+# Deliberately separate from _data/tags.yml. Provenance is a different
+# dimension from subject: "AI" (a topic) and "AI-written" (a disclosure) mean
+# unrelated things, and showing them as identical chips would conflate them.
+#
+# Every post MUST declare one of these. There is no default on purpose --
+# a disclosure that defaults silently is not a disclosure.
+#
+#   iptc  IPTC "Digital Source Type" URI, emitted in JSON-LD.
+#         Caveat: that vocabulary was designed for images, and search engines
+#         do not visibly act on it yet. It costs nothing and is the closest
+#         thing to a standard for provenance, so it is recorded rather than
+#         invented. The human-readable badge on the page is what actually
+#         communicates this today.
+# ---------------------------------------------------------------------------
+
+- slug: human-written
+  label: Human-written
+  short: Written by a human
+  description: Written by Amit Vyas. Generative AI did not draft the text.
+  icon: pen
+  iptc: https://cv.iptc.org/newscodes/digitalsourcetype/digitalCapture
+
+- slug: ai-written
+  label: AI-written
+  short: Drafted with AI
+  description: Drafted with generative AI, then reviewed, edited and published by Amit Vyas.
+  icon: sparkle
+  iptc: https://cv.iptc.org/newscodes/digitalsourcetype/trainedAlgorithmicMedia

@@ -30,17 +30,22 @@ search: true
     <button type="button" class="search__clear" hidden aria-label="Clear search">&times;</button>
   </div>
 
-  {%- assign tags = site.tags | sort %}
-  {%- if tags.size > 0 %}
-  <div class="tagbar" role="group" aria-label="Filter by tag">
+  {%- comment -%}
+    Chips follow the order in _data/tags.yml, not alphabetical order, so the
+    broad on-ramp tags come first. Only tags actually in use are shown -- a
+    chip that filters to nothing is worse than no chip.
+  {%- endcomment -%}
+  <div class="tagbar" role="group" aria-label="Filter by topic">
     <button type="button" class="tag tag--all is-active" data-tag="" aria-pressed="true">All</button>
-    {%- for t in tags %}
-    <button type="button" class="tag" data-tag="{{ t[0] }}" aria-pressed="false">
-      {{ t[0] }} <span class="tag__count">{{ t[1].size }}</span>
+    {%- for t in site.data.tags %}
+    {%- assign used = site.tags[t.slug] %}
+    {%- if used and used.size > 0 %}
+    <button type="button" class="tag" data-tag="{{ t.slug }}" aria-pressed="false" title="{{ t.description }}">
+      {{ t.label }} <span class="tag__count">{{ used.size }}</span>
     </button>
+    {%- endif %}
     {%- endfor %}
   </div>
-  {%- endif %}
 
   <p class="filter-status" id="filter-status" role="status" aria-live="polite"></p>
 </div>
@@ -56,9 +61,19 @@ search: true
       </h2>
       <p class="post-card__meta">
         <time datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%B %-d, %Y" }}</time>
+        {%- assign auth = site.data.authorship | where: "slug", post.authorship | first %}
+        {%- if auth %}
+        <span aria-hidden="true">&middot;</span>
+        <span class="post-card__auth">{{ auth.label }}</span>
+        {%- endif %}
         {%- if post.tags.size > 0 %}
         <span aria-hidden="true">&middot;</span>
-        <span class="post-card__tags">{{ post.tags | join: ", " }}</span>
+        <span class="post-card__tags">
+          {%- for tag in post.tags -%}
+          {%- assign t = site.data.tags | where: "slug", tag | first -%}
+          {{ t.label | default: tag }}{% unless forloop.last %}, {% endunless %}
+          {%- endfor -%}
+        </span>
         {%- endif %}
       </p>
       <p class="post-card__excerpt">

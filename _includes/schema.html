@@ -5,21 +5,62 @@
 {%- endcomment -%}
 {%- assign me = site.url | append: '/#person' -%}
 {%- if page.layout == 'post' -%}
+{%- comment -%} Topic labels, not raw slugs, so `keywords` reads as prose. {%- endcomment -%}
+{%- assign kw = '' -%}
+{%- for tag in page.tags -%}
+  {%- assign t = site.data.tags | where: 'slug', tag | first -%}
+  {%- assign kw = kw | append: t.label | default: tag -%}
+  {%- unless forloop.last %}{% assign kw = kw | append: ', ' %}{% endunless -%}
+{%- endfor -%}
+{%- assign auth = site.data.authorship | where: 'slug', page.authorship | first -%}
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
   "@type": "BlogPosting",
+  "@id": "{{ page.url | absolute_url }}#post",
   "headline": {{ page.title | jsonify }},
   "description": {{ page.description | default: page.excerpt | strip_html | strip_newlines | truncate: 200 | jsonify }},
   "datePublished": "{{ page.date | date_to_xmlschema }}",
-  "dateModified": "{{ page.last_modified_at | default: page.date | date_to_xmlschema }}",
+  "dateModified": "{% if page.last_modified_at %}{{ page.last_modified_at | date_to_xmlschema }}{% else %}{{ page.date | date_to_xmlschema }}{% endif %}",
   "author": { "@id": {{ me | jsonify }} },
   "publisher": { "@id": {{ me | jsonify }} },
   "url": {{ page.url | absolute_url | jsonify }},
   "mainEntityOfPage": { "@type": "WebPage", "@id": {{ page.url | absolute_url | jsonify }} },
-  "keywords": {{ page.tags | join: ', ' | jsonify }},
+  "keywords": {{ kw | jsonify }},
   "inLanguage": "en",
-  "isAccessibleForFree": true
+  "isAccessibleForFree": true{% if auth %},
+  {%- comment -%}
+    schema.org has no property for AI authorship. additionalProperty is its
+    sanctioned extension point, so the disclosure is recorded there rather
+    than invented as a bare field, with the IPTC digital-source-type URI
+    alongside it as the nearest thing to a cross-vendor standard.
+  {%- endcomment %}
+  "additionalProperty": [
+    {
+      "@type": "PropertyValue",
+      "name": "authorship",
+      "value": {{ auth.label | jsonify }},
+      "description": {{ auth.description | jsonify }}
+    },
+    {
+      "@type": "PropertyValue",
+      "propertyID": "https://cv.iptc.org/newscodes/digitalsourcetype/",
+      "name": "digitalSourceType",
+      "value": {{ auth.iptc | jsonify }}
+    }
+  ]{% endif %}
+}
+</script>
+{%- comment -%} Lets Google render the Home > Writing > Post trail in results. {%- endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Home",    "item": {{ '/' | absolute_url | jsonify }} },
+    { "@type": "ListItem", "position": 2, "name": "Writing", "item": {{ '/writing/' | absolute_url | jsonify }} },
+    { "@type": "ListItem", "position": 3, "name": {{ page.title | jsonify }} }
+  ]
 }
 </script>
 {%- else -%}

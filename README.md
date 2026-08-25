@@ -34,14 +34,18 @@ One Markdown file in `_posts/`, named `YYYY-MM-DD-some-slug.md`:
 ---
 title: "The title of the post"
 date: 2026-09-01
-tags: [ai, engineering]
+tags: [ai, gpu]              # must come from _data/tags.yml
+authorship: human-written    # or ai-written; required
 description: >-
-  One or two sentences. This is what shows in the post list, in Google
-  results and on social cards — worth writing properly.
+  One or two sentences, 50-160 characters. This is the Google snippet and
+  the post-list excerpt — worth writing properly.
 ---
 
 Body goes here, in Markdown.
 ```
+
+Optional: `last_modified_at: 2026-09-14` adds an "Updated" date and feeds
+`dateModified` in the structured data.
 
 Push to `master`. The post then appears at `/writing/some-slug/` and is added
 **automatically** to:
@@ -60,6 +64,44 @@ Nothing is hardcoded per-post. Tags are free-form.
 
 Unpublished drafts go in `_drafts/` (no date in the filename); preview them with
 `bundle exec jekyll serve --drafts`.
+
+## Tags and authorship
+
+Two separate controlled vocabularies. Provenance is not a topic, so keeping
+them apart stops "AI" (a subject) and "AI-written" (a disclosure) from
+rendering as the same kind of chip.
+
+| File | Field | Values |
+| ---- | ----- | ------ |
+| `_data/tags.yml` | `tags:` | tech, ai, software, gpu, cpu, business, economy, finance, society, psychology |
+| `_data/authorship.yml` | `authorship:` | human-written, ai-written |
+
+**Adding a tag:** append an entry to `_data/tags.yml` with a `slug`, `label`
+and `description`, then use the slug in front matter. The filter chips, the
+`keywords` in JSON-LD, the `og:article:tag` meta and the validator all derive
+from that one file. Chips appear in file order — broad topics first — and only
+tags actually in use are shown, since a chip that filters to nothing is worse
+than no chip.
+
+**Removing a tag:** delete the entry. The build then *fails* and names every
+post still using it, so a tag can never disappear silently.
+
+`script/validate-content.rb` runs in CI before the build and checks that every
+tag and authorship value is in vocabulary, that `description` exists and is
+50-160 characters, that `title` is present, and that the filename date matches
+the front-matter date (a classic Jekyll trap where a post silently fails to
+publish). Unknown values get a "did you mean" suggestion. Run it locally with:
+
+```bash
+ruby script/validate-content.rb
+```
+
+Because pull requests build too, a bad tag is caught before merge.
+
+Authorship is required with no default — a disclosure that defaults silently
+isn't a disclosure. It renders as a labelled badge on the post, shaped
+deliberately unlike a topic chip, and appears in the post list so readers can
+see it before clicking.
 
 ## Editing everything else
 
@@ -156,7 +198,15 @@ The AV monogram is my own logo.
   meta description and canonical link — the thing that actually gets indexed.
 - `sitemap.xml`, `robots.txt` (with the sitemap declared) and an RSS feed.
 - schema.org JSON-LD: `Person` + `WebSite` (with a `SearchAction` pointing at
-  `/writing/?q=`) on the homepage, `BlogPosting` on every post.
+  `/writing/?q=`) on the homepage, `BlogPosting` + `BreadcrumbList` on every
+  post, so Google can render the Home > Writing > Post trail in results.
+- `article:author` and `article:tag` Open Graph tags for LinkedIn/Facebook
+  previews (jekyll-seo-tag emits `article:published_time` but not these).
+- Authorship is recorded in JSON-LD via `additionalProperty`, schema.org's
+  sanctioned extension point, since schema.org has no property for AI
+  authorship. An IPTC digital-source-type URI is emitted alongside it. That
+  vocabulary was designed for images and search engines do not visibly act on
+  it yet; the badge on the page is what communicates this today.
 - Open Graph + Twitter `summary_large_image` card (`images/og-card.png`).
 - Favicon is a **square, 96×96** PNG (a multiple of 48, which is what Google
   requires to show an icon beside a search result) and is crawlable.
