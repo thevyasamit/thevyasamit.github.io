@@ -29,6 +29,23 @@ didn't earn that belief by understanding anything. It was handed to you.
 That is what I call **artificial belief**: a belief that comes from how sure
 the answer sounded, not from what you actually know.
 
+## 2 + 3 = 5, and so does 6 + (−1)
+
+Take the number 5. You can get there with 2 + 3. You can also get there with
+6 + (−1). Same answer, completely different paths.
+
+If all you look at is the 5, both look the same. But the answer is the
+smallest part of it. What matters is how you got there: understanding what the
+question is really asking, the context around it, and then making a decision.
+
+Now imagine you don't really understand the question. You can't see the path.
+All you can see is the final answer, 5, and it looks right. So you trust it,
+and because it looked right, you start to feel that you understand too. That
+is how artificial belief gets into you. Not through the reasoning, which you
+never saw, but through a final answer that looked correct.
+
+AI is very, very good at giving you the 5.
+
 ## Two screenshots
 
 Here is a real example. I was working with Claude Opus 5 on some code, and it
