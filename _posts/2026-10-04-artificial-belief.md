@@ -1,7 +1,7 @@
 ---
 title: "Artificial Belief"
 date: 2026-10-04
-tags: [ai, society, psychology]
+tags: [ai, society, psychology, philosophy]
 # I drafted this post, so it is disclosed as such. Change to human-written
 # once you rewrite it in your own words.
 authorship: ai-written

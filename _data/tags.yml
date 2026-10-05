@@ -58,3 +58,7 @@
 - slug: psychology
   label: Psychology
   description: Minds, behaviour and how people think.
+
+- slug: philosophy
+  label: Philosophy
+  description: Ideas, reasoning and the why behind things.
