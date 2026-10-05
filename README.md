@@ -2,7 +2,7 @@
 
 <a href="https://thevyasamit.github.io"><img src="images/personal_logo.png" alt="AV logo" width="120"></a>
 
-# Amit Vyas Public Website
+# [Amit Vyas Public Website](https://thevyasamit.github.io)
 
 **AI and Research Software Engineer** &middot; profile, CV and writing
 
@@ -14,22 +14,7 @@
 [![Code: MIT](https://img.shields.io/badge/code-MIT-blue)](LICENSE)
 [![Content: all rights reserved](https://img.shields.io/badge/content-%C2%A9%20all%20rights%20reserved-lightgrey)](LICENSE)
 
-[**Live site**](https://thevyasamit.github.io) &nbsp;&middot;&nbsp;
-[Writing](https://thevyasamit.github.io/writing/) &nbsp;&middot;&nbsp;
-[CV](https://thevyasamit.github.io/assets/Amit_Vyas_CV.pdf) &nbsp;&middot;&nbsp;
-[Google Scholar](https://scholar.google.com/citations?user=6D2uXYEAAAAJ&hl=en) &nbsp;&middot;&nbsp;
-[GitHub](https://github.com/thevyasamit) &nbsp;&middot;&nbsp;
-[LinkedIn](https://www.linkedin.com/in/thevyasamit/) &nbsp;&middot;&nbsp;
-[X](https://twitter.com/thevyasamit)
-
 <sub>A static <a href="https://jekyllrb.com/">Jekyll</a> site, hosted free on GitHub Pages, built and deployed by GitHub Actions.</sub>
-
-<br>
-
-<i>We are in a world where almost everything is virtual. Just like in the earlier
-days of civilisation people used to have a home/mailing address, I believe now
-is the time where people should have an e-address for their presence in this
-vast, web-dominating world in addition to their physical presence.</i>
 
 </div>
 
