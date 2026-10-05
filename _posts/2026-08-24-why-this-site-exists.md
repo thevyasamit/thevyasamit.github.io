@@ -18,7 +18,7 @@ I think GitHub has done a great job, and I want to leverage this as a way NOT ju
 
 Roughly three things, which is also roughly what I spend my days on:
 
-- **AI Technology.** I work in tech, and since a lot of tech these days is AI, so it may...
+- **AI Technology.** I work in tech, and since a lot of tech these days is AI, a lot of what I write will be about AI too.
 - **Engineering.** I've built things in the backend, and engineering backend systems is always fun.
 - **Philosophy/Personal observations.**  I like to know how things work, not engineering-wise but the cause, the motivation behind them, and also to understand the reasoning. It all starts with simple observations.
 
