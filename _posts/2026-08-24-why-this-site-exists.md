@@ -22,11 +22,6 @@ Roughly three things, which is also roughly what I spend my days on:
 - **Engineering.** I've built things in the backend, and engineering backend systems is always fun.
 - **Philosophy/Personal observations.**  I like to know how things work, not engineering-wise but the cause, the motivation behind them, and also to understand the reasoning. It all starts with simple observations.
 
-## How this works
+You can browse everything by tag, or search it, from the [writing page](/writing/).
 
-Posts are plain Markdown files in `_posts/`. The site is Jekyll on GitHub
-Pages, so publishing is a `git push` — no CMS, no database, nothing to keep
-patched. Everything is filterable by tag and searchable from the
-[writing index](/writing/).
-
-No newsletter, no popups, no tracking. Just the words.
+No newsletter, no popups. Just the words.
