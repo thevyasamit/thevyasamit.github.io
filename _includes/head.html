@@ -4,13 +4,16 @@
 <meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#111315" media="(prefers-color-scheme: dark)">
 
-{%- comment -%} Sets the theme before first paint so there is no light/dark flash. {%- endcomment -%}
+{%- comment -%} Sets the theme (and a hidden sidebar) before first paint so nothing flashes. {%- endcomment -%}
 <script>
   (function () {
     try {
       var s = localStorage.getItem('theme');
       var t = s || (matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
       document.documentElement.setAttribute('data-theme', t);
+      if (localStorage.getItem('sidebar') === 'hidden') {
+        document.documentElement.setAttribute('data-sidebar', 'hidden');
+      }
     } catch (e) {
       document.documentElement.setAttribute('data-theme', 'light');
     }

@@ -9,97 +9,64 @@ description: >-
 {%- assign home = site.data.home -%}
 
 <section class="intro" aria-labelledby="intro-h">
+  <p class="intro__hello">Hi, I&rsquo;m</p>
   <h1 id="intro-h">{{ site.author.name }}</h1>
   <p class="intro__lede">{{ home.intro.lede }}</p>
-  {%- if home.intro.quote %}
-  <p class="intro__quote">&ldquo;{{ home.intro.quote }}&rdquo;</p>
-  {%- endif %}
-  {%- if home.intro.cta %}
-  <p class="intro__actions">
-    <a class="button" href="{{ home.intro.cta.url | relative_url }}">
-      {{ home.intro.cta.label }}
-      <svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg>
-    </a>
-  </p>
-  {%- endif %}
 </section>
 
-<section id="about" aria-labelledby="about-h">
-  <h2 id="about-h">About</h2>
-  <div class="prose">
-    {%- for para in home.about %}
-    <p>{{ para }}</p>
-    {%- endfor %}
-  </div>
-
-  {%- if site.data.education and site.data.education.size > 0 %}
-  <h3 class="subhead">Education</h3>
-  <ul class="edu">
-    {%- for e in site.data.education %}
-    <li>
-      <span class="edu__degree">{{ e.degree }}</span>
-      <span class="edu__school">{{ e.school }}</span>
-      <span class="edu__meta">{{ e.end }} &middot; {{ e.location }}</span>
+{%- comment -%}
+  One card per place my work actually lives. The detail is kept elsewhere
+  (Scholar, GitHub, the CV) so this page never goes stale.
+{%- endcomment -%}
+<section class="doors" aria-label="Where to find my work">
+  <ul class="doors__grid">
+    {%- for d in home.doors %}
+    <li class="door door--{{ d.icon }}">
+      <span class="door__icon" aria-hidden="true">
+        <svg class="icon"><use href="#i-{{ d.icon }}"></use></svg>
+      </span>
+      <p class="door__kicker"><span class="door__num">{{ forloop.index | prepend: '0' | slice: -2, 2 }}</span> {{ d.kicker }}</p>
+      <h2 class="door__title">{{ d.title }}</h2>
+      <p class="door__text">{{ d.text }}</p>
+      <p class="door__actions">
+        {%- for l in d.links %}
+        {%- if l.social %}
+          {%- assign s = site.data.social | where: 'icon', l.social | first %}
+          <a class="pill" href="{{ s.url }}" rel="me noopener">
+            <svg class="icon" aria-hidden="true"><use href="#i-{{ s.icon }}"></use></svg>
+            {{ l.label }}
+          </a>
+        {%- else %}
+          <a class="pill" href="{{ l.url | relative_url }}">
+            {{ l.label }}
+            <svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg>
+          </a>
+        {%- endif %}
+        {%- endfor %}
+      </p>
     </li>
     {%- endfor %}
   </ul>
-  {%- endif %}
 </section>
 
-{%- if site.data.experience and site.data.experience.size > 0 %}
-<section id="experience" aria-labelledby="experience-h">
-  <h2 id="experience-h">Experience</h2>
-  <ol class="timeline">
-    {%- for job in site.data.experience %}
-    <li class="timeline__item{% if job.current %} is-current{% endif %}">
-      <div class="timeline__head">
-        <h3 class="timeline__role">{{ job.role }}</h3>
-        <p class="timeline__org">
-          {%- if job.url %}<a href="{{ job.url }}" rel="noopener">{{ job.org }}</a>
-          {%- else %}{{ job.org }}{% endif -%}
-        </p>
-      </div>
-      <p class="timeline__meta">
-        <time>{{ job.start }} &ndash; {{ job.end }}</time>
-        <span aria-hidden="true">&middot;</span>
-        <span>{{ job.location }}</span>
-        {%- if job.current %}<span class="badge">Current</span>{% endif %}
-      </p>
-      {%- if job.note %}<p class="timeline__note">{{ job.note }}</p>{% endif %}
-      {%- if job.skills %}
-      <ul class="chips" aria-label="Technologies used at {{ job.org }}">
-        {%- for s in job.skills %}<li class="chip">{{ s }}</li>{% endfor %}
-      </ul>
-      {%- endif %}
+{%- if site.posts.size > 0 %}
+<section class="latest" aria-labelledby="latest-h">
+  <h2 id="latest-h">Latest writing</h2>
+  <ul class="latest__list">
+    {%- for post in site.posts limit: 3 %}
+    <li>
+      <a href="{{ post.url | relative_url }}">
+        <span class="latest__title">{{ post.title }}</span>
+        <time class="latest__date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: '%b %-d, %Y' }}</time>
+      </a>
     </li>
     {%- endfor %}
-  </ol>
-</section>
-{%- endif %}
-
-{%- if site.data.publications and site.data.publications.size > 0 %}
-<section id="publications" aria-labelledby="publications-h">
-  <h2 id="publications-h">Publications</h2>
-  <ol class="pubs">
-    {%- for p in site.data.publications %}
-    <li class="pub">
-      <h3 class="pub__title">
-        {%- if p.url %}<a href="{{ p.url }}" rel="noopener">{{ p.title }}</a>
-        {%- else %}{{ p.title }}{% endif -%}
-      </h3>
-      <p class="pub__authors">{{ p.authors }}</p>
-      <p class="pub__venue">{{ p.venue }} &middot; <span class="pub__year">{{ p.year }}</span></p>
-    </li>
-    {%- endfor %}
-  </ol>
-  {%- assign more = site.data.home.sections.publications %}
-  {%- if more.more_url %}
+  </ul>
   <p class="section-more">
-    <a href="{{ more.more_url }}" rel="noopener">
-      {{ more.more_label }}
+    <a href="{{ '/writing/' | relative_url }}">
+      All writing
       <svg class="icon" aria-hidden="true"><use href="#i-arrow"></use></svg>
     </a>
   </p>
-  {%- endif %}
 </section>
 {%- endif %}

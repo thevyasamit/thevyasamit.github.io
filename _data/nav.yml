@@ -1,15 +1,6 @@
-# Sidebar navigation, in the order the page actually scrolls.
-# `url` may be a site path or an in-page anchor.
+# Sidebar navigation. The profile photo and name already link home, so the
+# only item is Writing.
 # `match` (optional) marks the item current when the page URL contains it.
-- label: Home
-  url: /
-  match: exact
-- label: About
-  url: /#about
-- label: Experience
-  url: /#experience
-- label: Publications
-  url: /#publications
 - label: Writing
   url: /writing/
   match: /writing

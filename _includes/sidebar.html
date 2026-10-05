@@ -14,9 +14,18 @@
              fetchpriority="high" decoding="async">
         <span class="profile__name">{{ site.author.name }}</span>
       </a>
-      <p class="profile__role">{{ site.author.role }}</p>
-      <p class="profile__org">{{ site.author.org }}</p>
+      {%- assign tl = site.data.home.tagline %}
+      <p class="tagline">
+        {{ tl.before }}
+        <s class="tagline__struck"><span class="u-visually-hidden">(crossed out:</span>{{ tl.struck }}<span class="u-visually-hidden">)</span></s>{{ tl.after }}
+      </p>
     </div>
+
+    <button class="sidebar-hide" type="button" data-sidebar-toggle
+            aria-controls="sidebar" aria-expanded="true" title="Hide sidebar">
+      <svg class="icon" aria-hidden="true"><use href="#i-panel"></use></svg>
+      <span class="u-visually-hidden">Hide sidebar</span>
+    </button>
 
     <button class="nav-toggle" type="button"
             aria-expanded="false" aria-controls="primary-nav"

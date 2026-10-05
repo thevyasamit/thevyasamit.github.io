@@ -7,8 +7,13 @@
   <a class="skip-link" href="#main">Skip to main content</a>
   {% include icons.html %}
 
-  <div class="layout">
+  <div class="layout{% if page.url == "/" %} is-home{% endif %}">
     {% include sidebar.html %}
+    <button class="sidebar-show" type="button" data-sidebar-toggle
+            aria-controls="sidebar" aria-expanded="true" title="Show sidebar">
+      <svg class="icon" aria-hidden="true"><use href="#i-panel"></use></svg>
+      <span class="u-visually-hidden">Show sidebar</span>
+    </button>
 
     <main class="main" id="main" tabindex="-1">
       {{ content }}

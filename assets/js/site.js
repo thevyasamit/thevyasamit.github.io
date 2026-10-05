@@ -69,6 +69,29 @@
     });
   }
 
+  /* ------------------------------------------------------- hide sidebar */
+  /* Desktop only: readers can fold the sidebar away. The choice is a
+     per-visitor convenience, so it lives in localStorage. */
+  var sidebarButtons = document.querySelectorAll('[data-sidebar-toggle]');
+
+  function setSidebar(hidden, byClick) {
+    if (hidden) root.setAttribute('data-sidebar', 'hidden');
+    else root.removeAttribute('data-sidebar');
+    sidebarButtons.forEach(function (b) { b.setAttribute('aria-expanded', String(!hidden)); });
+    if (byClick) {
+      try { localStorage.setItem('sidebar', hidden ? 'hidden' : 'shown'); } catch (e) { /* private mode */ }
+      var next = document.querySelector(hidden ? '.sidebar-show' : '.sidebar-hide');
+      if (next) next.focus();
+    }
+  }
+
+  setSidebar(root.getAttribute('data-sidebar') === 'hidden', false);
+  sidebarButtons.forEach(function (b) {
+    b.addEventListener('click', function () {
+      setSidebar(root.getAttribute('data-sidebar') !== 'hidden', true);
+    });
+  });
+
   /* ------------------------------------------------------------ scrollspy */
   /* Nav items like /#experience point at sections of the CURRENT page, so
      Liquid's aria-current can never match them -- the URL never changes as

@@ -1,5 +1,11 @@
-# Everything on the homepage that is prose rather than structure.
-# Inline HTML is allowed (links, <em>, &mdash; and friends).
+# Everything on the homepage (and the sidebar tagline) that is prose rather
+# than structure. Inline HTML is allowed (links, <em>, &mdash; and friends).
+
+# Sidebar line under the name. `struck` renders crossed out between the two.
+tagline:
+  before: I&rsquo;m a human trying to understand AI before
+  struck: AI starts understanding humans
+  after: ", AI starts taking over the humans!"
 
 intro:
   lede: >-
@@ -7,27 +13,49 @@ intro:
     research usable &mdash; APIs, infrastructure and developer tooling &mdash;
     at the <a href="https://icicle.osu.edu/">ICICLE AI Institute</a>,
     The Ohio State University.
-  quote: I'm a human trying to understand AI before AI starts understanding humans.
-  # Optional call-to-action. Left unset deliberately: Writing is in the nav,
-  # so a button here is one more thing to look at for no extra reach.
-  # cta:
-  #   label: Read my writing
-  #   url: /writing/
 
-# Each list item is one paragraph.
-about:
-  - >-
-    I work at the intersection of research and production software. Day to day
-    that means designing REST APIs and OpenAPI specifications, running services
-    on Kubernetes, wrangling data pipelines, and writing the documentation that
-    makes any of it usable by someone who wasn't in the room when it was built.
-  - >-
-    Before Ohio State I spent time building Python backends in industry, and
-    before that I was a research assistant working on 3D object detection and
-    multi-camera sensor fusion for autonomous driving. That mix &mdash; shipping
-    systems and publishing papers &mdash; is the thread through most of what I do.
+# The cards on the homepage, in order. `links` are either a `social` key
+# (matched against `icon` in _data/social.yml, so each URL lives in one place)
+# or a `url` + `label` pair.
+doors:
+  - kicker: Papers
+    title: Publications
+    icon: scholar
+    text: >-
+      I try to keep my Google Scholar profile up to date, and it does a much
+      better job of listing my papers than I would here.
+    links:
+      - social: scholar
+        label: Open Google Scholar
 
-sections:
-  publications:
-    more_label: Full list on Google Scholar
-    more_url: https://scholar.google.com/citations?user=6D2uXYEAAAAJ&hl=en
+  - kicker: Code
+    title: Things I build
+    icon: github
+    text: >-
+      Want to see the actual code? My GitHub has my projects, a lot of them
+      AI-powered.
+    links:
+      - social: github
+        label: Visit my GitHub
+
+  - kicker: CV
+    title: My course of life
+    icon: cv
+    text: >-
+      Curious where I've been and what I've done so far? It's all in my CV,
+      and I'll try to keep it updated.
+    links:
+      - url: /assets/Amit_Vyas_CV.pdf
+        label: Open my CV (PDF)
+
+  - kicker: Networking
+    title: Let's connect
+    icon: wave
+    text: >-
+      Always happy to meet people working on interesting things. Say hi on
+      LinkedIn or X.
+    links:
+      - social: linkedin
+        label: LinkedIn
+      - social: x
+        label: X
