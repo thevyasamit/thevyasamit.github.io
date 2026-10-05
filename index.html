@@ -2,9 +2,8 @@
 layout: default
 title: Amit Vyas
 description: >-
-  Software engineer and researcher at the ICICLE AI Institute, The Ohio State
-  University. I build AI infrastructure, APIs and applied machine learning
-  systems, and write about AI, engineering and health.
+  I'm Amit Vyas, an AI and Research Software Engineer building software and
+  infrastructure for scientific computing and AI research.
 ---
 {%- assign home = site.data.home -%}
 
@@ -12,6 +11,9 @@ description: >-
   <p class="intro__hello">Hi, I&rsquo;m</p>
   <h1 id="intro-h">{{ site.author.name }}</h1>
   <p class="intro__lede">{{ home.intro.lede }}</p>
+  {%- if home.intro.detail %}
+  <p class="intro__detail">{{ home.intro.detail }}</p>
+  {%- endif %}
 </section>
 
 {%- comment -%}

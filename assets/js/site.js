@@ -165,6 +165,22 @@
     window.__pickActive = pickActive;
   }
 
+  /* ------------------------------------------------- links in a new tab */
+  /* Anything that leaves the site -- other domains, and files such as the
+     CV PDF -- opens in a new tab so the reader keeps their place here.
+     Navigation within the site stays in the same tab. */
+  document.querySelectorAll('a[href]').forEach(function (a) {
+    var url;
+    try { url = new URL(a.getAttribute('href'), location.href); } catch (e) { return; }
+    var external = /^https?:$/.test(url.protocol) && url.host !== location.host;
+    var file = /\.(pdf|png|jpe?g|gif|svg|webp)$/i.test(url.pathname);
+    if (!external && !file) return;
+    a.target = '_blank';
+    var rel = (a.getAttribute('rel') || '').split(/\s+/).filter(Boolean);
+    if (rel.indexOf('noopener') === -1) rel.push('noopener');
+    a.setAttribute('rel', rel.join(' '));
+  });
+
   /* -------------------------------------------------- anchors on headings */
   var body = document.querySelector('.post__body');
   if (body) {

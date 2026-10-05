@@ -9,10 +9,15 @@ tagline:
 
 intro:
   lede: >-
-    I'm a software engineer and researcher. I build the plumbing that makes AI
-    research usable &mdash; APIs, infrastructure and developer tooling &mdash;
-    at the <a href="https://icicle.osu.edu/">ICICLE AI Institute</a>,
-    The Ohio State University.
+    I&rsquo;m an AI and Research Software Engineer building software and
+    infrastructure for scientific computing and AI research.
+  detail: >-
+    At the <a href="https://icicle.osu.edu/">ICICLE AI Institute</a> at The
+    Ohio State University, I work with researchers, scientists, and domain
+    experts across multiple institutions to turn research ideas into reliable,
+    reusable systems: AI infrastructure, research platforms, and open-source
+    tools spanning ML infrastructure, retrieval, agentic AI, model serving,
+    and scientific software.
 
 # The cards on the homepage, in order. `links` are either a `social` key
 # (matched against `icon` in _data/social.yml, so each URL lives in one place)

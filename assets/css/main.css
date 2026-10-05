@@ -299,7 +299,8 @@ th { font-weight: 600; }
 .main > .intro { margin-bottom: clamp(2.5rem, 6vw, 3.5rem); }
 .intro h1 { margin-bottom: 0.9rem; font-size: clamp(2.2rem, 1.6rem + 2.6vw, 3.4rem); letter-spacing: -0.03em; }
 
-.intro__lede { font-size: var(--step-1); color: var(--text-muted); line-height: 1.5; }
+.intro__lede { font-size: var(--step-1); color: var(--text); line-height: 1.5; }
+.intro__detail { margin-top: 0.9rem; color: var(--text-muted); line-height: 1.65; }
 
 .intro__hello {
   font-family: var(--font-mono);
@@ -337,7 +338,6 @@ th { font-weight: 600; }
 @media (max-width: 40em) { .doors__grid { grid-template-columns: minmax(0, 1fr); } }
 
 .door {
-  --tint: var(--accent);
   position: relative;
   display: flex; flex-direction: column;
   padding: 1.4rem 1.4rem 1.25rem;
@@ -347,30 +347,18 @@ th { font-weight: 600; }
   overflow: hidden;
   transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
 }
-.door::after {                                   /* soft corner glow */
-  content: ""; position: absolute; inset: auto -30% -60% auto;
-  width: 70%; aspect-ratio: 1; border-radius: 50%;
-  background: radial-gradient(closest-side, color-mix(in srgb, var(--tint) 14%, transparent), transparent);
-  pointer-events: none;
-}
-.door:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); border-color: color-mix(in srgb, var(--tint) 45%, var(--border)); }
+.door:hover { transform: translateY(-3px); box-shadow: var(--shadow-lift); border-color: var(--border-strong); }
 
-.door--scholar { --tint: #2f7de1; }
-.door--github  { --tint: #8250df; }
-.door--cv      { --tint: #e0732b; }
-.door--wave    { --tint: #1a9e6e; }
 
 .door__icon {
   display: grid; place-items: center;
   width: 2.75rem; height: 2.75rem;
   margin-bottom: 1.1rem;
   border-radius: 12px;
-  color: var(--tint);
-  background: color-mix(in srgb, var(--tint) 12%, var(--surface));
-  transform: rotate(-4deg);
-  transition: transform 220ms ease;
+  color: var(--text);
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
 }
-.door:hover .door__icon { transform: rotate(0) scale(1.06); }
 .door__icon .icon { width: 1.35rem; height: 1.35rem; }
 
 .door__kicker {
@@ -378,7 +366,7 @@ th { font-weight: 600; }
   font-size: 0.75rem; letter-spacing: 0.06em; text-transform: uppercase;
   color: var(--text-faint);
 }
-.door__num { color: var(--tint); margin-right: 0.3rem; }
+.door__num { color: var(--text-muted); margin-right: 0.3rem; }
 .door__title { font-size: var(--step-1); font-weight: 700; margin-top: 0.2rem; }
 .door__text { margin-top: 0.5rem; color: var(--text-muted); font-size: var(--step--1); line-height: 1.6; flex: 1; }
 .door__actions { margin-top: 1.1rem; display: flex; flex-wrap: wrap; gap: 0.5rem; position: relative; z-index: 1; }
@@ -387,13 +375,13 @@ th { font-weight: 600; }
   display: inline-flex; align-items: center; gap: 0.45rem;
   padding: 0.45rem 0.85rem;
   font-size: var(--step--1); font-weight: 600;
-  color: var(--tint, var(--accent));
+  color: var(--text);
   text-decoration: none;
-  border: 1px solid currentColor;
+  border: 1px solid var(--border-strong);
   border-radius: 999px;
   transition: background 140ms ease, color 140ms ease;
 }
-.pill:hover { background: var(--tint, var(--accent)); color: #fff; }
+.pill:hover { background: var(--text); border-color: var(--text); color: var(--bg); }
 .pill .icon { width: 0.95rem; height: 0.95rem; transition: transform 140ms ease; }
 .pill:hover .icon { transform: translateX(1px); }
 

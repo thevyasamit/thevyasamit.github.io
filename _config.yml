@@ -2,11 +2,15 @@
 # Site
 # ---------------------------------------------------------------------------
 title: Amit Vyas
-tagline: Software Engineer & Researcher
+tagline: AI and Research Software Engineer
 description: >-
-  Amit Vyas is a software engineer and researcher at the ICICLE AI Institute,
-  The Ohio State University, working on AI infrastructure, APIs and applied
-  machine learning. Writing on AI, engineering and health.
+  I'm Amit Vyas, an AI and Research Software Engineer building software and
+  infrastructure for scientific computing and AI research. At the ICICLE AI
+  Institute at The Ohio State University, I work with researchers, scientists,
+  and domain experts across multiple institutions to turn research ideas into
+  reliable, reusable systems: AI infrastructure, research platforms, and
+  open-source tools spanning ML infrastructure, retrieval, agentic AI, model
+  serving, and scientific software.
 url: "https://thevyasamit.github.io"
 baseurl: ""
 lang: en_US
@@ -17,7 +21,7 @@ timezone: Etc/UTC
 author:
   name: Amit Vyas
   twitter: thevyasamit
-  role: Software Engineer, AI
+  role: AI and Research Software Engineer
   org: ICICLE AI Institute, The Ohio State University
   location: Columbus, OH, United States
 

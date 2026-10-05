@@ -1,6 +1,9 @@
-# Sidebar navigation. The profile photo and name already link home, so the
-# only item is Writing.
-# `match` (optional) marks the item current when the page URL contains it.
+# Sidebar navigation.
+# `match` (optional) marks the item current when the page URL contains it;
+# `exact` matches the homepage only.
+- label: Home
+  url: /
+  match: exact
 - label: Writing
   url: /writing/
   match: /writing

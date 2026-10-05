@@ -15,7 +15,7 @@ with attribution.
 
 ## Pages
 
-- [Home]({{ '/' | absolute_url }}): biography, education, full work history and publications.
+- [Home]({{ '/' | absolute_url }}): a short introduction, with links to publications (Google Scholar), code (GitHub), the CV and contact.
 - [Writing]({{ '/writing/' | absolute_url }}): index of all posts, filterable by tag and searchable.
 
 ## Writing
