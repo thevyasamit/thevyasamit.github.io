@@ -1,28 +1,54 @@
-# thevyasamit.github.io
+<div align="center">
 
-My personal site — profile, CV and writing. A static [Jekyll](https://jekyllrb.com/)
-site, hosted free on GitHub Pages, built and deployed by GitHub Actions.
+<a href="https://thevyasamit.github.io"><img src="images/personal_logo.png" alt="AV logo" width="120"></a>
 
-**Live:** <https://thevyasamit.github.io>
+# Amit Vyas Public Website
 
-> We are in a world where almost everything is virtual. Just like in the earlier
-> days of civilisation people used to have a home/mailing address, I believe now
-> is the time where people should have an e-address for their presence in this
-> vast, web-dominating world in addition to their physical presence.
+**AI and Research Software Engineer** &middot; profile, CV and writing
+
+[![Build & deploy](https://github.com/thevyasamit/thevyasamit.github.io/actions/workflows/deploy.yml/badge.svg?branch=master)](https://github.com/thevyasamit/thevyasamit.github.io/actions/workflows/deploy.yml)
+[![Website](https://img.shields.io/website?url=https%3A%2F%2Fthevyasamit.github.io&label=site&up_message=online)](https://thevyasamit.github.io)
+[![Built with Jekyll](https://img.shields.io/badge/built%20with-Jekyll%204-cc0000?logo=jekyll&logoColor=white)](https://jekyllrb.com/)
+[![Last commit](https://img.shields.io/github/last-commit/thevyasamit/thevyasamit.github.io)](https://github.com/thevyasamit/thevyasamit.github.io/commits/master)
+<br>
+[![Code: MIT](https://img.shields.io/badge/code-MIT-blue)](LICENSE)
+[![Content: all rights reserved](https://img.shields.io/badge/content-%C2%A9%20all%20rights%20reserved-lightgrey)](LICENSE)
+
+[**Live site**](https://thevyasamit.github.io) &nbsp;&middot;&nbsp;
+[Writing](https://thevyasamit.github.io/writing/) &nbsp;&middot;&nbsp;
+[CV](https://thevyasamit.github.io/assets/Amit_Vyas_CV.pdf) &nbsp;&middot;&nbsp;
+[Google Scholar](https://scholar.google.com/citations?user=6D2uXYEAAAAJ&hl=en) &nbsp;&middot;&nbsp;
+[GitHub](https://github.com/thevyasamit) &nbsp;&middot;&nbsp;
+[LinkedIn](https://www.linkedin.com/in/thevyasamit/) &nbsp;&middot;&nbsp;
+[X](https://twitter.com/thevyasamit)
+
+<sub>A static <a href="https://jekyllrb.com/">Jekyll</a> site, hosted free on GitHub Pages, built and deployed by GitHub Actions.</sub>
+
+<br>
+
+<i>We are in a world where almost everything is virtual. Just like in the earlier
+days of civilisation people used to have a home/mailing address, I believe now
+is the time where people should have an e-address for their presence in this
+vast, web-dominating world in addition to their physical presence.</i>
+
+</div>
 
 ---
 
 ## Contents
 
 - [Adding a post](#adding-a-post)
+- [Tags and authorship](#tags-and-authorship)
 - [Editing everything else](#editing-everything-else)
 - [Repository layout](#repository-layout)
 - [Running locally](#running-locally)
 - [What's used](#whats-used)
 - [SEO & discoverability](#seo--discoverability)
 - [Accessibility](#accessibility)
+- [Analytics](#analytics)
 - [Deployment](#deployment)
 - [The footer year](#the-footer-year)
+- [Licence](#licence)
 
 ---
 
@@ -60,7 +86,7 @@ Push to `master`. The post then appears at `/writing/some-slug/` and is added
 | `llms.txt`                | Loops `site.posts`                          |
 | JSON-LD `BlogPosting`     | `_includes/schema.html`                     |
 
-Nothing is hardcoded per-post. Tags are free-form.
+Nothing is hardcoded per-post. Tags come from a fixed list -- see below.
 
 Unpublished drafts go in `_drafts/` (no date in the filename); preview them with
 `bundle exec jekyll serve --drafts`.
@@ -73,7 +99,7 @@ rendering as the same kind of chip.
 
 | File | Field | Values |
 | ---- | ----- | ------ |
-| `_data/tags.yml` | `tags:` | tech, ai, software, gpu, cpu, business, economy, finance, society, psychology |
+| `_data/tags.yml` | `tags:` | tech, ai, software, gpu, cpu, business, economy, finance, society, psychology, philosophy |
 | `_data/authorship.yml` | `authorship:` | human-written, ai-written |
 
 **Adding a tag:** append an entry to `_data/tags.yml` with a `slug`, `label`
@@ -109,16 +135,16 @@ No HTML required — the content is YAML, the templates just render it.
 
 | File                     | Controls                                              |
 | ------------------------ | ----------------------------------------------------- |
-| `_data/home.yml`         | Homepage intro, quote, call-to-action, About paragraphs |
-| `_data/experience.yml`   | Experience timeline (newest first; `current: true` adds the badge) |
-| `_data/publications.yml` | Publications list                                     |
-| `_data/education.yml`    | Education list                                        |
-| `_data/social.yml`       | Sidebar icon links (`icon` maps to a symbol in `_includes/icons.html`) |
-| `_data/nav.yml`          | Sidebar navigation items                              |
+| `_data/home.yml`         | Sidebar tagline (with its struck-out words), homepage intro, and the four homepage cards |
+| `_data/social.yml`       | Sidebar icon links and the homepage card buttons (`icon` maps to a symbol in `_includes/icons.html`) |
+| `_data/nav.yml`          | Sidebar navigation items (Home, Writing)              |
+| `_data/experience.yml`, `_data/education.yml`, `_data/publications.yml` | Not shown on the page any more; they still feed `llms.txt` and the JSON-LD |
 | `_config.yml`            | Name, role, org, description, social handles, timezone |
+| `assets/Amit_Vyas_CV.pdf`| The CV. Replace the file (same name) to update it -- the link stays the same |
 
-Every homepage section is wrapped in a presence check, so emptying a data file
-removes that section cleanly instead of leaving an empty heading behind.
+A homepage card links either to a `social:` entry (looked up by `icon`, so each
+URL lives in one place) or to a `url:`. Links that leave the site, and files
+like the CV, open in a new tab; navigation within the site does not.
 
 Adding a new social link needs an `<svg><symbol id="i-yourname">` in
 `_includes/icons.html` plus an entry in `_data/social.yml`.
@@ -139,14 +165,18 @@ Adding a new social link needs an `<svg><symbol id="i-yourname">` in
 ├── 404.html
 ├── assets/
 │   ├── css/main.css         one stylesheet, tokenised
-│   ├── js/site.js           theme toggle, mobile nav, heading anchors
+│   ├── js/site.js           theme toggle, mobile nav, sidebar hide/show,
+│   │                         new-tab links, heading anchors
 │   ├── js/writing.js        tag filtering + full-text search
+│   ├── Amit_Vyas_CV.pdf     the CV linked from the homepage
 │   └── favicon.png
-├── images/                  portrait, logo, derived icons, OG card
+├── images/                  portrait, logo, derived icons, OG card,
+│                             post images (images/posts/<slug>/)
 ├── search.json              full-text index, generated at build
 ├── llms.txt                 plain-text site summary for AI agents
 ├── robots.txt
 ├── site.webmanifest
+├── LICENSE                  code: MIT · content: all rights reserved
 └── .github/workflows/       build+deploy, footer-year refresh
 ```
 
@@ -158,19 +188,16 @@ bundle exec jekyll serve          # http://127.0.0.1:4000
 bundle exec jekyll serve --drafts # include drafts
 ```
 
-Needs Ruby 3.0+ — macOS system Ruby (2.6) is too old, so `brew install ruby`
-and make sure it precedes `/usr/bin` on your `PATH`.
+Needs Ruby 3.0 or newer.
 
-`Gemfile.lock` is intentionally **not** committed. It gets generated by
-whichever Ruby you have locally, which may be far newer than the Ruby the
-Actions runner uses; committing it can pin a `BUNDLED WITH` version CI cannot
+`Gemfile.lock` is intentionally **not** committed: a lockfile generated by a
+newer local Ruby can pin a `BUNDLED WITH` version the Actions runner cannot
 install. The `Gemfile` uses `~>` constraints, so CI resolves compatible
-versions on its own. If you ever want fully reproducible builds, commit the
-lockfile *and* match `ruby-version` in `deploy.yml` to your local Ruby.
+versions on its own.
 
 ## What's used
 
-Deliberately small. No framework, no bundler, no CDN, no tracking, no cookies.
+Deliberately small. No framework, no bundler, no CDN, no cookies.
 
 | Thing | Why |
 | ----- | --- |
@@ -186,7 +213,7 @@ Deliberately small. No framework, no bundler, no CDN, no tracking, no cookies.
 | System font stack | Zero webfont downloads, native look per-OS |
 | Hand-rolled inline SVG sprite | Replaced Font Awesome (~70 KB CSS + webfonts) with ~2 KB |
 
-Total first paint is roughly **63 KB** with zero external requests.
+Total first paint is roughly **63 KB**, with no external requests other than the analytics beacon.
 
 **Credits:** the site is written from scratch. Earlier versions used an
 [HTML5 UP](https://html5up.net/) template; none of that code remains.
@@ -215,10 +242,6 @@ The AV monogram is my own logo.
   text as JSON. Both are linked from `<head>` and the footer, and `robots.txt`
   welcomes crawlers.
 
-After the first deploy, submit the sitemap once in
-[Google Search Console](https://search.google.com/search-console) to speed up
-indexing.
-
 ## Accessibility
 
 Targets WCAG 2.1 AA.
@@ -242,7 +265,7 @@ The token is **public by design** -- it ships in the HTML of every page, so it
 is committed deliberately rather than hidden. It is write-only and
 hostname-bound: Cloudflare rejects beacons whose hostname does not
 postfix-match the one registered in the dashboard, and it cannot be used to
-read any data. Rotate it by deleting and re-adding the site in Cloudflare.
+read any data.
 
 The beacon only renders when `jekyll.environment` is `production`, so local
 `jekyll serve` never pollutes the stats. The token is compared against `""`
@@ -251,11 +274,6 @@ true -- without that, an unset token would emit a beacon with `token:""` and
 fail silently. Blank the value to disable analytics entirely.
 
 Cookieless, so no consent banner is required.
-
-> [!IMPORTANT]
-> If the site moves to a custom domain, register that hostname in the
-> Cloudflare dashboard too. Otherwise the hostname check fails and analytics
-> silently drop to zero -- no error, just an empty dashboard.
 
 ## Deployment
 
@@ -268,23 +286,16 @@ Pull requests run the same build and link-check but skip the deploy job, so
 Both `master` and `main` are watched, so renaming the default branch cannot
 silently stop deploys.
 
-**Repo setting required:** Settings → Pages → Build and deployment →
-Source = **GitHub Actions**. Until this is set, GitHub's legacy Jekyll
-builder also runs on every push and its deploy step collides with this
-workflow's, producing spurious failure emails.
+GitHub Pages is set to deploy from **GitHub Actions**, so this workflow is
+the only thing that builds and publishes the site.
 
 ### Branch protection
 
-This repo is public, so rulesets are free. Settings → Rules → Rulesets →
-New branch ruleset, targeting the default branch:
-
-- Restrict deletions, block force pushes
-- Require a pull request before merging, with **0 required approvals**
-- Require status checks to pass: **`build`**
-
-Zero approvals is deliberate: GitHub does not let you approve your own pull
-request, so on a solo repo requiring even one approval blocks every PR you
-open. Zero still forces the PR flow and still gates merges on a green build.
+`master` is protected against deletion and force pushes, with history kept
+linear. Pull requests and status checks are deliberately **not** required:
+posts are pushed straight to `master`, and a direct push has no checks yet, so
+GitHub would reject every one. The validator still runs on every push and
+fails the deploy, so a broken post never goes live.
 
 ## The footer year
 
@@ -303,11 +314,19 @@ Verified:
 | 2026-12-31 23:59      | © 2026 ❌       |
 | 2027-01-01 00:10      | © 2027 ✅       |
 
-> [!NOTE]
-> GitHub disables scheduled workflows after **60 days without repository
-> activity** (it emails you first). If you go a couple of months without
-> pushing, re-enable it from the Actions tab — one click.
-
 ## Licence
 
-Code is free to reuse. Post content and the AV logo are © Amit Vyas.
+<div align="center">
+
+**Code: [MIT](LICENSE)** &nbsp;&middot;&nbsp; **Content: © Amit Vyas, all rights reserved**
+
+The site's structure, templates, styles and scripts are free to reuse for your
+own site.<br>
+The writing, the portraits, the AV logo, the post images, the CV and the
+personal profile text are not.<br>
+Short quotes with a link back are welcome. See [`LICENSE`](LICENSE) for exactly
+which files are which.
+
+<sub>© 2026 Amit Vyas</sub>
+
+</div>
