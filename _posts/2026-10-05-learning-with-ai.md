@@ -42,10 +42,11 @@ toward what actually makes sense.
 
 AI can help you navigate complexity. You still have to own the navigation.
 
-## Three questions
+## The WWWH model
 
 Whether I'm answering my own questions or explaining something to someone
-else, three questions make almost anything clearer:
+else, I lean on four questions. I call it the **WWWH model**, a simple mental
+framework for learning almost anything:
 
 **What is it?**
 Understand what the thing actually is. Define it, and know its basic parts.
@@ -54,11 +55,15 @@ Understand what the thing actually is. Define it, and know its basic parts.
 Understand why it exists, why it matters, and what causes or principles sit
 behind it.
 
+**When to use it?**
+Understand when it applies and when it doesn't: the situations it fits, its
+limits, and the moments when something else is the better choice.
+
 **How do you use it?**
 Understand how the knowledge can be applied, connected to other knowledge, or
 used to make a decision.
 
-Ask them about each piece first. Then ask them again about the whole.
+Ask all four about each piece first. Then ask them again about the whole.
 
 ## Thinking with AI, not depending on it
 
