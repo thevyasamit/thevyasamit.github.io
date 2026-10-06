@@ -5,7 +5,7 @@ tags: [ai, psychology]
 authorship: ai-written
 description: >-
   AI is excellent at single pieces of knowledge and shakier where those pieces
-  meet. Break a topic apart, understand each piece, then put it back together
+  meet. Break a topic apart, understand each piece, then rebuild the whole
   yourself.
 ---
 
