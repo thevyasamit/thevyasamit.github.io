@@ -1,5 +1,5 @@
 ---
-title: "Understanding AI Through Divide and Conquer"
+title: "How to Learn with AI"
 date: 2026-10-05
 tags: [ai, psychology]
 authorship: ai-written
